@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.ScreensMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.Screens">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="movieId" jdbcType="VARCHAR" property="movieid" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="price" jdbcType="REAL" property="price" />
+    <result column="ticketNum" jdbcType="SMALLINT" property="ticketnum" />
+    <result column="hallNum" jdbcType="VARCHAR" property="hallnum" />
+    <result column="playingType" jdbcType="VARCHAR" property="playingtype" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.Users">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="payPassword" jdbcType="VARCHAR" property="paypassword" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="money" jdbcType="REAL" property="money" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="isAdmin" jdbcType="BIT" property="isadmin" />
+  </resultMap>
+</mapper>
