@@ -1,6 +1,6 @@
 package com.company.project.service.impl;
 
-import com.company.project.dao.FavoritesMapper;
+import com.company.project.mapper.FavoritesMapper;
 import com.company.project.model.Favorites;
 import com.company.project.service.FavoritesService;
 import com.company.project.core.AbstractService;

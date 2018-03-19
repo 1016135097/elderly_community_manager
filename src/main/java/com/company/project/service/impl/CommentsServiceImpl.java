@@ -1,6 +1,6 @@
 package com.company.project.service.impl;
 
-import com.company.project.dao.CommentsMapper;
+import com.company.project.mapper.CommentsMapper;
 import com.company.project.model.Comments;
 import com.company.project.service.CommentsService;
 import com.company.project.core.AbstractService;

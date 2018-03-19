@@ -1,6 +1,6 @@
 package com.company.project.service.impl;
 
-import com.company.project.dao.ScreensMapper;
+import com.company.project.mapper.ScreensMapper;
 import com.company.project.model.Screens;
 import com.company.project.service.ScreensService;
 import com.company.project.core.AbstractService;

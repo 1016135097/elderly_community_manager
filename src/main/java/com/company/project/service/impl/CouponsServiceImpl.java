@@ -1,6 +1,6 @@
 package com.company.project.service.impl;
 
-import com.company.project.dao.CouponsMapper;
+import com.company.project.mapper.CouponsMapper;
 import com.company.project.model.Coupons;
 import com.company.project.service.CouponsService;
 import com.company.project.core.AbstractService;

@@ -1,6 +1,6 @@
 package com.company.project.service.impl;
 
-import com.company.project.dao.OrdersMapper;
+import com.company.project.mapper.OrdersMapper;
 import com.company.project.model.Orders;
 import com.company.project.service.OrdersService;
 import com.company.project.core.AbstractService;

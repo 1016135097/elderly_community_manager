@@ -1,6 +1,6 @@
 package com.company.project.service.impl;
 
-import com.company.project.dao.MoviesMapper;
+import com.company.project.mapper.MoviesMapper;
 import com.company.project.model.Movies;
 import com.company.project.service.MoviesService;
 import com.company.project.core.AbstractService;

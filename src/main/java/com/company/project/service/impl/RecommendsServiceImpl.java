@@ -1,6 +1,6 @@
 package com.company.project.service.impl;
 
-import com.company.project.dao.RecommendsMapper;
+import com.company.project.mapper.RecommendsMapper;
 import com.company.project.model.Recommends;
 import com.company.project.service.RecommendsService;
 import com.company.project.core.AbstractService;

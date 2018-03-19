@@ -1,6 +1,6 @@
 package com.company.project.service.impl;
 
-import com.company.project.dao.UsersMapper;
+import com.company.project.mapper.UsersMapper;
 import com.company.project.model.Users;
 import com.company.project.service.UsersService;
 import com.company.project.core.AbstractService;
