@@ -1,7 +1,7 @@
 #服务配置
 server:
   port: 8080
-  context-path: /movie
+#  context-path: /movie
 #日志配置
 logging:
   config: classpath:logback.xml
@@ -13,7 +13,7 @@ logging:
 #context-listener监听
 context:
   listener:
-    classes: com.company.project.listener.ApplicationEventListener
+    classes: com.stars.project.listener.ApplicationEventListener
 #数据库配置
 spring:
   profiles:
