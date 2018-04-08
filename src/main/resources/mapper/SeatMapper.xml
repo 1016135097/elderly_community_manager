@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stars.project.mapper.SeatMapper">
+  <resultMap id="BaseResultMap" type="com.stars.project.entity.Seat">
+    <id column="t_id" jdbcType="BIGINT" property="id" />
+    <result column="t_x_axis" jdbcType="INTEGER" property="xAxis" />
+    <result column="t_y_axis" jdbcType="INTEGER" property="yAxis" />
+    <result column="t_hall_id" jdbcType="BIGINT" property="hallId" />
+    <result column="t_seat_state" jdbcType="INTEGER" property="seatState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    t.id as t_id, t.x_axis as t_x_axis, t.y_axis as t_y_axis, t.hall_id as t_hall_id, 
+    t.seat_state as t_seat_state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from seat t
+    where t.id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from seat
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.stars.project.entity.Seat">
+    insert into seat (id, x_axis, y_axis, 
+      hall_id, seat_state)
+    values (#{id,jdbcType=BIGINT}, #{xAxis,jdbcType=INTEGER}, #{yAxis,jdbcType=INTEGER}, 
+      #{hallId,jdbcType=BIGINT}, #{seatState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.stars.project.entity.Seat">
+    insert into seat
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="xAxis != null">
+        x_axis,
+      </if>
+      <if test="yAxis != null">
+        y_axis,
+      </if>
+      <if test="hallId != null">
+        hall_id,
+      </if>
+      <if test="seatState != null">
+        seat_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="xAxis != null">
+        #{xAxis,jdbcType=INTEGER},
+      </if>
+      <if test="yAxis != null">
+        #{yAxis,jdbcType=INTEGER},
+      </if>
+      <if test="hallId != null">
+        #{hallId,jdbcType=BIGINT},
+      </if>
+      <if test="seatState != null">
+        #{seatState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.stars.project.entity.Seat">
+    update seat
+    <set>
+      <if test="xAxis != null">
+        x_axis = #{xAxis,jdbcType=INTEGER},
+      </if>
+      <if test="yAxis != null">
+        y_axis = #{yAxis,jdbcType=INTEGER},
+      </if>
+      <if test="hallId != null">
+        hall_id = #{hallId,jdbcType=BIGINT},
+      </if>
+      <if test="seatState != null">
+        seat_state = #{seatState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.stars.project.entity.Seat">
+    update seat
+    set x_axis = #{xAxis,jdbcType=INTEGER},
+      y_axis = #{yAxis,jdbcType=INTEGER},
+      hall_id = #{hallId,jdbcType=BIGINT},
+      seat_state = #{seatState,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

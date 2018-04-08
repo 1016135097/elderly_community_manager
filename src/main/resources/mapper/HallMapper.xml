@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stars.project.mapper.HallMapper">
+  <resultMap id="BaseResultMap" type="com.stars.project.entity.Hall">
+    <id column="t_id" jdbcType="BIGINT" property="id" />
+    <result column="t_name" jdbcType="VARCHAR" property="name" />
+    <result column="t_code" jdbcType="VARCHAR" property="code" />
+    <result column="t_type" jdbcType="INTEGER" property="type" />
+    <result column="t_cinema_id" jdbcType="BIGINT" property="cinemaId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    t.id as t_id, t.name as t_name, t.code as t_code, t.type as t_type, t.cinema_id as t_cinema_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hall t
+    where t.id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from hall
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.stars.project.entity.Hall">
+    insert into hall (id, name, code, 
+      type, cinema_id)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{cinemaId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.stars.project.entity.Hall">
+    insert into hall
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="cinemaId != null">
+        cinema_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaId != null">
+        #{cinemaId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.stars.project.entity.Hall">
+    update hall
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaId != null">
+        cinema_id = #{cinemaId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.stars.project.entity.Hall">
+    update hall
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      cinema_id = #{cinemaId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

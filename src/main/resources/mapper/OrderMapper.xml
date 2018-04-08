@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stars.project.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.stars.project.entity.Order">
+    <id column="t_id" jdbcType="BIGINT" property="id" />
+    <result column="t_code" jdbcType="VARCHAR" property="code" />
+    <result column="t_price" jdbcType="DECIMAL" property="price" />
+    <result column="t_move_id" jdbcType="BIGINT" property="moveId" />
+    <result column="t_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="t_order_state" jdbcType="INTEGER" property="orderState" />
+    <result column="t_pay_state" jdbcType="INTEGER" property="payState" />
+    <result column="t_disco_id" jdbcType="BIGINT" property="discoId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    t.id as t_id, t.code as t_code, t.price as t_price, t.move_id as t_move_id, t.create_time as t_create_time, 
+    t.order_state as t_order_state, t.pay_state as t_pay_state, t.disco_id as t_disco_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order t
+    where t.id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.stars.project.entity.Order">
+    insert into order (id, code, price, 
+      move_id, create_time, order_state, 
+      pay_state, disco_id)
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{moveId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{orderState,jdbcType=INTEGER}, 
+      #{payState,jdbcType=INTEGER}, #{discoId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.stars.project.entity.Order">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="moveId != null">
+        move_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="orderState != null">
+        order_state,
+      </if>
+      <if test="payState != null">
+        pay_state,
+      </if>
+      <if test="discoId != null">
+        disco_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="moveId != null">
+        #{moveId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderState != null">
+        #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="payState != null">
+        #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="discoId != null">
+        #{discoId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.stars.project.entity.Order">
+    update order
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="moveId != null">
+        move_id = #{moveId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderState != null">
+        order_state = #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="payState != null">
+        pay_state = #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="discoId != null">
+        disco_id = #{discoId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.stars.project.entity.Order">
+    update order
+    set code = #{code,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      move_id = #{moveId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      order_state = #{orderState,jdbcType=INTEGER},
+      pay_state = #{payState,jdbcType=INTEGER},
+      disco_id = #{discoId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
