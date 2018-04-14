@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS `medical_and_life`;
 DROP TABLE IF EXISTS `children`;
 DROP TABLE IF EXISTS `illness`;
 DROP TABLE IF EXISTS `work_flow`;
+DROP TABLE IF EXISTS `work_flow_item`;
 DROP TABLE IF EXISTS `household`;
 
 -- 用户表
@@ -45,9 +46,7 @@ CREATE TABLE `residence` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT,
 `user_id` bigint(20) NOT NULL COMMENT '用户id',
 `address` varchar(200) NULL COMMENT '地址',
--- TODO
-`code` varchar(10) NULL COMMENT '代码',
-`location` varchar(255) NULL COMMENT '位置',
+`mobile` varchar(11) NULL COMMENT '电话号',
 PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='居住信息表';
 
@@ -58,10 +57,6 @@ CREATE TABLE `retire` (
 `age` int(4) NULL COMMENT '退休年龄',
 `type` int(3) NULL  COMMENT '退休类型',
 `retire_time` datetime NULL COMMENT '退休时间',
--- TODO
-`name` varchar(50) NULL COMMENT '名称',
-`code` varchar(10) NULL COMMENT '代码',
-`cinema_id` bigint(20) NULL COMMENT '影院id',
 PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='退休情况表';
 
@@ -70,8 +65,6 @@ CREATE TABLE `medical_and_life` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT,
 `user_id` bigint(20) NULL COMMENT '用户id',
 `create_time` datetime NULL COMMENT '开始时间',
-
--- TODO
 PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='医疗保险表';
 
@@ -99,8 +92,6 @@ CREATE TABLE `illness` (
 `state` varchar(20) NULL COMMENT '疾病状态',
 `hospital` varchar(50) NULL COMMENT '主治医院',
 `type` int(2) NULL DEFAULT 0 COMMENT '类型',
-
--- TODO
 PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='疾病情况表';
 
@@ -109,11 +100,6 @@ CREATE TABLE `work_flow` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT,
 `user_id` bigint(20) NULL COMMENT '用户id',
 `name` varchar(20) NULL COMMENT '名称',
--- TODO
-`grade` numeric(5,0) NULL,
-`content` text NULL,
-`user_id` bigint(20) NULL,
-`movie_id` bigint(20) NULL,
 PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工作流程表';
 

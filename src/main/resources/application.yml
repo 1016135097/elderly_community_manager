@@ -1,7 +1,6 @@
 #服务配置
 server:
   port: 8080
-#  context-path: /movie
 #日志配置
 logging:
   config: classpath:logback.xml
@@ -19,34 +18,17 @@ spring:
   profiles:
     active: dev
   application:
-    name: movie
+    name: manager
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     joda-date-time-format: yyyy-MM-dd HH:mm:ss
   jpa:
     open-in-view: true
     show-sql: true
-#redis配置 使用spring starter 待完善
-#  redis:
-#    host: 192.168.1.188
-#    port: 6379
-#    pool:
-#      max-idle: 4
-#      min-idle: 1
-#      max-wait: 4000
-#      max-active: 4
-#mybatis配置
-mybatis:
-  mapper-locations: classpath:/mapper/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
-    use-column-label: true
-  type-aliases-package: com.company.project.model
 #查看运行情况。是否敏感
 management:
   security:
     enabled: false
-
 ---
 #生产环境
 spring:
@@ -63,7 +45,7 @@ spring:
      max-wait: 60000
      time-between-eviction-runs-millis: 60000
      min-evictable-idle-time-millis: 300000
-     url: jdbc:mysql://127.0.0.1:3306/movie?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+     url: jdbc:mysql://127.0.0.1:3306/elderly_community_manager?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
      username: root
      password: root
 ---
@@ -82,6 +64,6 @@ spring:
       max-wait: 60000
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 300000
-      url: jdbc:mysql://127.0.0.1:3306/movie?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+      url: jdbc:mysql://127.0.0.1:3306/elderly_community_manager?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
       username: root
       password: root

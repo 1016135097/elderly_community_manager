@@ -18,7 +18,7 @@ import java.util.Date;
  * @Modified By :
  **/
 
-public class AiomJsonDateDeserializer extends JsonDeserializer<Date> {
+public class JsonDateDeserializer extends JsonDeserializer<Date> {
 
     @Override
     public Date deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {

@@ -34,7 +34,7 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("电影售票项目Swagger调试页面")
+                .title("老年社区管理项目Swagger调试页面")
                 .description("描述：Spring Boot中使用Swagger2构建RESTful APIs")
                 .termsOfServiceUrl("http://www.wowker.com/")
                 .contact("stars小组")
