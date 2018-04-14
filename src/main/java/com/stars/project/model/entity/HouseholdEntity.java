@@ -20,11 +20,13 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "medicalandlife")
-public class MedicalAndLife {
+@Table(name = "household")
+public class HouseholdEntity {
 
   private long id;
   private long userId;
-  private java.sql.Timestamp createTime;
-
+  private String master;
+  private String code;
+  private String address;
+  private long type;
 }

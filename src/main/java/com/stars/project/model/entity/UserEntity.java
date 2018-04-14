@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+
 /**
  * @Author : WuWei
  * @Date : Created on 22:02 2018/4/14
@@ -20,13 +21,17 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "household")
-public class Household {
+@Table(name = "user")
+public class UserEntity {
 
   private long id;
-  private long userId;
-  private String master;
-  private String code;
-  private String address;
+  private String name;
+  private long sex;
+  private long age;
+  private String mobile;
+  private String idNumber;
+  private String emergencyContact;
+  private String password;
   private long type;
+  private java.sql.Timestamp createTime;
 }

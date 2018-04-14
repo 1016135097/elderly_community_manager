@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Entity
 @Table(name = "workflowitem")
-public class WorkFlowItem {
+public class WorkFlowItemEntity {
 
   private long id;
   private long flowId;

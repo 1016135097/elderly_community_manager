@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-
 /**
  * @Author : WuWei
  * @Date : Created on 22:02 2018/4/14
@@ -21,10 +20,16 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "workflow")
-public class WorkFlow {
-
+@Table(name = "children")
+public class ChildrenEntity {
   private long id;
   private long userId;
   private String name;
+  private long sex;
+  private long age;
+  private String mobile;
+  private String idNumber;
+  private String email;
+  private long type;
+  private String address;
 }

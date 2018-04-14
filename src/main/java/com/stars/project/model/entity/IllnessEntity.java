@@ -20,16 +20,13 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "children")
-public class Children {
+@Table(name = "illness")
+public class IllnessEntity {
+
   private long id;
   private long userId;
   private String name;
-  private long sex;
-  private long age;
-  private String mobile;
-  private String idNumber;
-  private String email;
+  private String state;
+  private String hospital;
   private long type;
-  private String address;
 }

@@ -20,12 +20,12 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "retire")
-public class Retire {
+@Table(name = "residence")
+public class ResidenceEntity {
 
   private long id;
   private long userId;
-  private long age;
-  private long type;
-  private java.sql.Timestamp retireTime;
+  private String address;
+  private String mobile;
+
 }
