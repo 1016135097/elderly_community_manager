@@ -1,15 +1,13 @@
-# MovieTicket-Back-End-XY
-影院订票系统后端-springboot+mybatis+mysql+swagger
+# elderly_community_manager
+社区老年人口信息管理系统-springboot+mybatis+mysql+swagger
 
 ## API地址
 http://localhost:8080/swagger-ui.html
 
-test目录下的CodeGenerator
-代码生成器，根据数据表名称生成对应的Model、Mapper、Service、Controller简化开发。
-
 需求：
      
-     前端使用vue框架，vue全家桶+webpack 使用ES6规范；具有查看影讯、选座、在线支付等功能，模仿猫眼电影网页端，注释要详细，带设计文档；
+     前端使用vue框架，vue全家桶+webpack 使用ES6规范；1、实现对老年人口信息的管理，包括老年人口基本信息、居住信息、退休情况、医疗养老情况、子女情况、是否空巢、慢性病情况等。不仅仅是信息的管理，还要为日常工作提供依据。
+                                      2、实现不同类型用户的不同管理功能。
 
      后端使用springboot+mybatis+mysql+swagger；注释要详细，带设计文档；
      

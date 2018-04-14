@@ -23,6 +23,9 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     joda-date-time-format: yyyy-MM-dd HH:mm:ss
+  jpa:
+    open-in-view: true
+    show-sql: true
 #redis配置 使用spring starter 待完善
 #  redis:
 #    host: 192.168.1.188
@@ -43,15 +46,6 @@ mybatis:
 management:
   security:
     enabled: false
-
-#fdfs:
-#  soTimeout: 1501
-#  connectTimeout: 601
-#  thumbImage:             #缩略图生成参数
-#    width: 150
-#    height: 150
-#  trackerList:            #TrackerList参数,支持多个
-#    - 182.254.155.43:22122
 
 ---
 #生产环境
