@@ -25,6 +25,9 @@ spring:
   jpa:
     open-in-view: true
     show-sql: true
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
 #查看运行情况。是否敏感
 management:
   security:
@@ -45,7 +48,7 @@ spring:
      max-wait: 60000
      time-between-eviction-runs-millis: 60000
      min-evictable-idle-time-millis: 300000
-     url: jdbc:mysql://127.0.0.1:3306/elderly_community_manager?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+     url: jdbc:mysql://192.168.1.6:3306/elderly_community_manager?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
      username: root
      password: root
 ---
@@ -64,6 +67,6 @@ spring:
       max-wait: 60000
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 300000
-      url: jdbc:mysql://127.0.0.1:3306/elderly_community_manager?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+      url: jdbc:mysql://192.168.1.6:3306/elderly_community_manager?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
       username: root
-      password: root
+      password: stars2018

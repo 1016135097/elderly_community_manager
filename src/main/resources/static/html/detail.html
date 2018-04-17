@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/detail.css">
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+    <script src="../../resources/js/jquery.min.js"></script>
+    <script src="../../resources/js/bootstrap.js"></script>
+    <title>公司简介</title>
+
+    <script>
+        $(document).ready(function () {
+            BindByJquery1();
+            //BindByJquery2();
+        });
+        //按照jquery方式添加事件处理1
+        function BindByJquery1() {
+            try{
+                var btns = $('p');
+                //循环遍历所有的按钮，一个一个添加事件绑定
+                for (var i = 0; i < btns.length; ++i) {
+                    btns[i].onclick = function () {
+                       addBtn();
+                        window.open ('zyc.html', 'newwindow', 'height=300, width=400, top=400, left=500, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no') //这句要写成一行
+                    }
+                }
+            }
+            catch (error) {
+                alert(error);
+            }
+        }
+        function addBtn() {
+            var addBtnDiv=$("#addBtnDiv");
+            var btn1 = $("<input type='button' value=\"1\"></input>").appendTo(addBtnDiv);
+        }
+    </script>
+</head>
+<body>
+<div id="addBtnDiv"></div>
+<div class="c-wrapper">
+    <div class="navbar navbar-default" id="nav" role="navigation">
+        <div class="container-fluid">
+            <img src="../../resources/img/logo.png">
+            <ul class="nav-bar">
+                <li class="nav-current" role="presentation"><a href="javascript:;">首页</a>&nbsp;&nbsp;|</li>
+                <li role="presentation">&nbsp;&nbsp;<a href="javascript:;">公司简介</a>&nbsp;&nbsp;|</li>
+                <li role="presentation">&nbsp;&nbsp;<a href="javascript:;">服务内容</a>&nbsp;&nbsp;|</li>
+                <li role="presentation">&nbsp;&nbsp;<a href="javascript:;">项目公告</a>&nbsp;&nbsp;|</li>
+                <li role="presentation">&nbsp;&nbsp;<a href="javascript:;">项目展示</a>&nbsp;&nbsp;|</li>
+                <li role="presentation">&nbsp;&nbsp;<a href="javascript:;">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="detitle">
+        <img src="../../resources/img/detitle.jpg">
+    </div>
+    <div class="tagg">
+        <span><i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;公司简介</span>
+    </div>
+    <div class="diagram">
+        <img id="diaimg" src="../../resources/img/diagram.jpg">
+        <h1 name="p">公司简介</h1>
+        <span class="fistp">发布者:万科集团     浏览次数:2602</span>
+        <p>基本原则:旧城区改建工程是一项综合性、系统性工程，按照“优化征收程序、简化审批手续”的基本思路，坚持“加快手续办理、简化审批要件、下放审批权限、做好政策衔接”的基本原则，在切实保障被征收居民合法权益的基础上，多措并举加快推进旧城区改建工作。</p>
+        <p> 适用范围:本实施意见适用于全市实施旧城区改建范围的房屋征收项目。旧城区改建具体包括中心城区棚户区改造、平房区院落修缮、危旧房改造等项目。</p>
+        <p> 实施主体:各区县人民政府负责本行政区域内旧城区改建房屋征收与补偿工作，组织相关部门对征收补偿方案论证，作出房屋征收决定、补偿决定。</p>
+        <p> 暂停办理:区县房屋征收部门根据建设单位提交的征收要件以及房屋征收申请向区县人民政府申请启动房屋征收工作，在收到区县人民政府确认意见后3个工作日内，在征收范围内发布暂停公告，告知产权人、公房承租人不得在房屋征收范围内实施新建、扩建、改建房屋和改变房屋用途、变更房屋权属登记等不当增加补偿费用的行为，违反规定的不予补偿。暂停期限为一年，需要延长暂停期限的，区县房屋征收部门应当提前15日在征收范围内及时发布延期公告，延长期限最长不超过一年。各区县人民政府负责本行政区域内旧城区改建房屋征收与补偿工作，组织相关部门对征收补偿方案论证，作出房屋征收决定、补偿决定。</p>
+        <img class="city" src="../../resources/img/city.png">
+        <p> 调查登记:区县房屋征收部门可以委托房屋征收实施单位对房屋征收范围内房屋的权属、区位、用途、建筑面积等情况进行调查登记，产权人、公房承租人应当予以配合。调查结果应当在房屋征收范围内公布。</p>
+        <p> 预签协议:区县房屋征收部门按照公布的征收补偿方案,组织产权人、公房承租人预签附生效条件的征收补偿协议。预签征收补偿协议生效具体比例由各区县人民政府确定，预签征收补偿协议期限不超过6个月。预签收补偿协议生效的，由区县房屋征收部门报请区县人民政府作出房屋征收决定；在预签征收补偿协议期限内未达到生效比例的，征收工作终止。征收补偿协议生效前不实际支付补偿款和提供房源。</p>
+        <p> 强制执行:在补偿决定规定的期限内不搬迁的，由作出房屋征收决定的区县人民政府依法申请人民法院强制执行。</p>
+    </div>
+    <div class="news">
+        <div class="newleft">
+            <img id="diaimgTwo" src="../../resources/img/diagram.jpg">
+            <h1>入户调查动态（十四）</h1>
+            <p>2017年7月29日，万科企业股份有限公司（以下简称万科集团）与中国节能环保集团公司（以下简称中国节能）在北京签署战略合作协议，中国节能董事长刘大山、总经理王彤...</p>
+            <a class="detailinfo" href="javascript:;">详细信息&nbsp;&nbsp;&gt;</a>
+        </div>
+        <div class="newright">
+            <h1>相关新闻</h1>
+            <p>2017.07.11  张仪村路东侧棚改征收一问一答 </p>
+            <p>2017.07.15  入户调查动态（二）</p>
+            <p>2017.07.15  入户调查动态（三）</p>
+            <p>2017.08.01  致住户和产权单位的一封信（一）</p>
+            <p>2017.07.15  入户调查动态（二）</p>
+            <p>2017.08.17  凝聚群众力量！共建美好家园！</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

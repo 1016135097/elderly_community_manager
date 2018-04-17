@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>老年人管理系统</title>
+    <link th:href="@{~/css/login/reset.css}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{~/js/easyui/themes/bootstrap/easyui.css}" />
+    <link th:href="@{~/css/login/login.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{~/js/jquery/jquery-1.7.1.min.js}"></script>
+    <script th:src="@{~/js/jquery/jquery.cookie.js}"></script>
+    <script th:src="@{~/js/common/validate.js}"></script>
+    <script th:src="@{~/js/common/md5.js}"></script>
+    <script th:src="@{~/js/common/login.js}"></script>
+</head>
+<body onkeydown="javascript:if(event.keyCode==13)loginSubmit();">
+<input id="idInput" type="hidden" value="company" />
+<div class="container clearfix">
+    <!-----------------页面左侧文字------------------>
+    <div class="secL">
+        <h2>老年人管理系统</h2>
+        <p>
+            实现对老年人口信息的管理，包括老年人口基本信息、居住信息、<br>退休情况、医疗养老情况、子女情况、是否空巢、慢性病情况等。<br>不仅仅是信息的管理，还要为日常工作提供依据。
+        </p>
+    </div>
+    <!-----------------页面右侧表单------------------>
+    <div class="secR">
+        <!-----页面右侧透明背景----->
+        <div class="box-bg"></div>
+        <!--------表单内容------------>
+        <form action="login" method="post" name="frmLogin" id="loginForm">
+            <div class="form">
+                <h1>登录平台</h1>
+                <div class="item clearfix">
+                    <label for="userNameIpt"></label>
+                    <input type="text" tabindex="1" id="userNameIpt" name="name"
+                           notnull="true" info="用户名" placeholder="请输入用户名">
+                </div>
+                <div class="item itempass clearfix">
+                    <label for="password"></label>
+                    <input type="password" tabindex="2" id="password" name="password" notnull="true" info="密码"
+                           autocomplete="off" placeholder="请输入密码" />
+                </div>
+                <div class="item itemRadio clearfix">
+                    <a href="#" onclick="modifyPassword()" style="float: right;">忘记密码?</a>
+                </div>
+
+                <div class="item">
+                    <button type="button" tabindex="5" onclick="loginSubmit();" id="btnSubmit" onkeydown="javascript:if(event.keyCode==13){event.returnValue = false}">登&nbsp;&nbsp;录</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 修改密码弹窗结束-->
+<script type="text/javascript">
+    function loginSubmit() {
+        if (verification()) {
+            var url=getRootPath()+"/login";
+            var userName = $("#userNameIpt").val();
+            var loginInfo = userName+" ";
+            $.cookie("loginInfo", loginInfo);
+            $.ajax({
+                type:"post",
+                url:url,
+                dataType:'json',
+                data:{"name":$('#userNameIpt').val(),"password":$('#password').val()},
+                async:false,
+                success:function(data) {
+                    if(data.code==1){
+                        window.location.href=getRootPath()+"/manager";
+                    }else {
+                        alert("操作信息："+data.msg);
+                    }
+                },
+                error:function (data) {
+                    alert("出现错误，请联系管理员。");
+                }
+            });
+        }
+    }
+
+
+
+
+    function submitFormPwd() {
+        if($("#password2").val() == "") {
+            alert("请输入原密码");
+            return;
+        }
+        if($("#newPwd").val() == "") {
+            alert("请输入新密码");
+            return;
+        }
+        if($("#valiPwd").val() == "") {
+            alert("请输入确认密码");
+            return;
+        }
+        if ($("#password2").val() == $("#newPwd").val()) {
+            alert("原密码和新密码不能一样");
+            return;
+        }
+        var reg = /(?=.*[0-9])(?=.*[a-zA-Z])(?=([\x21-\x7e]+)[^a-zA-Z0-9]).{8,30}/;
+        if(!reg.test($("#newPwd").val())) {
+            alert("新密码必须包含数字，字母及特殊符号,并且在8位以上");
+            return;
+        }
+
+        if($("#newPwd").val() != $("#valiPwd").val()) {
+            alert("新密码必须和确认密码一致");
+            return;
+        }
+
+        $.post("platform/common/changeLoginPassword.do", {
+            header_password : $("#password2").val(),
+            header_newPwd : $("#newPwd").val(),
+            header_valiPwd : $("#valiPwd").val()
+        },function(data){
+            if(data.result == "true") {
+                alert("密码修改成功,请妥善保管");
+                closeFormPwd();
+            } else {
+                alert(data.message);
+            }
+        });
+    }
+
+    function validatePassword(elem){
+        var password = $(elem).val();
+        $.post("platform/common/validateUserPassword.do", {
+            password : $("#password2").val(),
+        },function(data){
+            if(data == "success") {
+                $("#password2Red").hide();
+                $("#password2Green").show();
+            } else {
+                $("#password2Red").show();
+                $("#password2Green").hide();
+            }
+        });
+    }
+
+    function validateOldAndNewPass(elem,elemName){
+        var password = $(elem).val();
+        password=password.replace(/\s+/g, "");
+        var reg = /(?=.*[0-9])(?=.*[a-zA-Z])(?=([\x21-\x7e]+)[^a-zA-Z0-9]).{8,30}/;
+        if(elemName=='newPwd'){
+            if(!reg.test(password)) {
+                $("#newPwdRed").show();
+                $("#newPwdGreen").hide();
+
+                $("#newPwdRed").html('密码不符合规则');
+            }else{
+                $("#newPwdRed").html('');
+
+                $("#newPwdRed").hide();
+                $("#newPwdGreen").show()
+            }
+        }
+        if(elemName=='valiPwd'){
+            if($("#newPwd").val()!=$("#valiPwd").val()){
+                $("#valiPwdRed").html('确认密码和新密码不一致');
+                $("#valiPwdRed").show();
+                $("#valiPwdGreen").hide();
+            }else{
+                $("#valiPwdRed").html('');
+                $("#valiPwdRed").hide();
+                $("#valiPwdGreen").show();
+            }
+        }
+    }
+    function modifyPassword(){
+        alert(1)
+    }
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,150 @@
+html,body{
+    margin:0;
+    padding:0;
+}
+#nav {
+    border:0;
+    background: linear-gradient(to bottom,#f7f9fa,#d4d8d9);
+    margin-bottom: 0;
+}
+#nav img {
+    position: absolute;
+    top:0;
+    left:5%;
+    height: 78px;
+}
+.c-wrapper{
+    width:100%;
+}
+.nav-bar{
+    padding: 0;
+    width: 80%;
+    left: 25%;
+    position: absolute;
+    top: 30%;
+    text-align: center;
+}
+.nav-bar a{
+    text-decoration: none;
+    color: #777;
+}
+.container-fluid{
+    position: relative;
+    height: 80px;
+    width:60%;
+}
+.nav-bar li{
+    display: inline-block;
+    font-size: 22px;
+    letter-spacing: 2.5px;
+    color: rgb(216,220,221);
+}
+ul li{
+    list-style-type:none;
+}
+.tagg{
+    width:60%;
+    height:100px;
+    margin-left: 20%;
+    border-bottom: 2px solid #c5c5c5;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.tagg span{
+    display: inline-block;
+    margin-top: 40px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.diagram{
+    position: relative;
+    width:60%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right:10px;
+    margin-top: 20px;
+    padding-left: 120px;
+}
+#diaimg{
+    position: absolute;
+    width: 100px;
+    heigth:100px;
+    left:0;
+}
+#diaimglast{
+    width:100%;
+    margin-bottom: 15px;
+}
+.diagram h1{
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.fistp{
+    display: block;
+    margin-bottom: 30px;
+    color: #746969;
+    font-size: 12px;
+}
+.city{
+    width:100%;
+    margin-bottom: 15px;
+}
+.diagram p{
+    margin-bottom: 15px;
+    color: #746969;
+    font-size: 15px;
+    line-height: 20px;
+}
+.news{
+    position: relative;
+    width:60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+    padding-left: 120px;
+    padding-right:10px;
+    border-top:2px solid #c5c5c5;
+}
+.news h1{
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.detailinfo{
+    color:red;
+}
+.newleft{
+    margin-bottom: 23px;
+    width: 50%;
+    height: 170px;
+    border-right: 1px dotted #ccc;
+}
+.newleft p{
+    color: #777;
+    width:95%;
+    text-align: justify;
+    font-size: 15px;
+}
+#diaimgTwo{
+    position: absolute;
+    width: 100px;
+    heigth:100px;
+    left:0;
+}
+.newright{
+    position: absolute;
+    top: 0;
+    left: 57%;
+}
+.newright h1{
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+.newright p{
+    color: #777;
+    margin:0;
+    font-size: 15px;
+}

@@ -5,8 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @Author : WuWei
@@ -22,7 +21,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "medicalandlife")
 public class MedicalAndLifeEntity {
-
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   private long userId;
   private java.sql.Timestamp createTime;

@@ -11,4 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Modified By :
  **/
 public interface SystemUserDao extends JpaRepository<SystemUserEntity,Long> {
+    public SystemUserEntity findByname(String name);
 }

@@ -1,0 +1,139 @@
+.c-wrapper{
+    width:100%;
+}
+ul li{
+    list-style-type:none;
+
+}
+#nav {
+    width: 60%;
+    height: 80px;
+    border:0;
+    position: absolute;
+    z-index: 9;
+    top: 5%;
+    left: 20%;
+}
+.nav-current a{
+    border-bottom: 3px solid rgb(18,109,179);
+    padding-bottom: 27px;
+}
+.glyphicon-menu-left{
+    float: left;
+    margin-top: -28%;
+    margin-left: 2%;
+    color: white;
+}
+.glyphicon-menu-right{
+    float: right;
+    margin-top: -28%;
+    margin-right: 2%;
+    color: white;
+}
+#nav img {
+    height: 78px;
+    position: absolute;
+    left: 0;
+}
+.container-fluid{
+    position: relative;
+    height: 80px;
+    background: linear-gradient(to bottom,#f7f9fa,#d4d8d9);
+}
+.nav-bar{
+    padding: 0;
+    width: 80%;
+    left: 20%;
+    position: absolute;
+    top: 30%;
+    text-align: center;
+}
+.nav-bar a{
+    text-decoration: none;
+    color: #777;
+}
+.nav-bar li{
+    display: inline-block;
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: rgb(216,220,221);
+}
+#journalism{
+    width:60%;
+    margin-left:auto;
+    margin-right:auto;
+}
+#msg{
+    line-height: 38px;
+    color: #777;
+    font-size: 22px;
+    margin-top: 4.5%;
+}
+#dynamic{
+    font-weight: bold;
+}
+.col-lg-4{
+    margin-top: 3%;
+}
+.col-lg-4 input{
+    border: 1px solid #5bc0de;
+    float: right;
+    width: 300px;
+    height: 38px;
+    border-radius: 20px;
+    font-size: 18px;
+}
+#search{
+    font-size: 24px;
+    margin-top: 1%;
+    right: 9%;
+    position: absolute;
+}
+#journalism>.row{
+    height:100px;
+}
+#journalism >.row img{
+    margin-top: 4.5%;
+    margin-right: 8px;
+    float: left;
+}
+.inner{
+    line-height: 30px;
+    color: #777;
+    font-size: 18px;
+    width:100%;
+}
+.pic img{
+    margin-bottom: 5%;
+    width:100%;
+}
+.botbar{
+    width:100%;
+    height: 160px;
+    background-color: rgb(0,145,212);
+    margin-top: 85px;
+}
+.botbar ul{
+    padding:0;
+}
+.botbar ul li{
+    display:inline-block;
+    margin-top: 5%;
+    letter-spacing: 2px;
+}
+.botbar ul li a,.delimiter{
+    color: white;
+    font-size: 22px;
+}
+.botbar div{
+    width:60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.botbar a{
+    text-decoration: none;
+}
+.delimit{
+    color: white;
+    font-size: 16px;
+}

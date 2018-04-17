@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://localhost:7070/website/css/detail.css">
+    <link rel="stylesheet" href="http://localhost:7070/website/bootstrap/dist/css/bootstrap.min.css">
+    <script src="http://localhost:7070/website/js/jquery.min.js"></script>
+    <script src="http://localhost:7070/website/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="http://localhost:7070/website/js/tools.js"></script>
+    <title>Title</title>
+
+</head>
+<body>
+<input type="hidden" value="FqrOdfRe" id="htmlcode">
+<div class="c-wrapper">
+    <div class="navbar navbar-default" id="nav" role="navigation">
+        <div class="container-fluid">
+            <img src="img/logo.png">
+            <ul class="nav-bar">
+                <li class="nav-current" role="presentation"><a href="javascript:;">首页</a>&nbsp;&nbsp;|</li>
+                <li role="presentation">&nbsp;&nbsp;<a href="javascript:;">公司简介</a>&nbsp;&nbsp;|</li>
+                <li role="presentation">&nbsp;&nbsp;<a href="javascript:;">服务内容</a>&nbsp;&nbsp;|</li>
+                <li role="presentation">&nbsp;&nbsp;<a href="javascript:;">项目公告</a>&nbsp;&nbsp;|</li>
+                <li role="presentation">&nbsp;&nbsp;<a href="javascript:;">项目展示</a>&nbsp;&nbsp;|</li>
+                <li role="presentation">&nbsp;&nbsp;<a href="javascript:;">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="detitle">
+        <img src="img/detitle.jpg">
+    </div>
+    <div class="tagg">
+        <span><i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;公司简介</span>
+    </div>
+    <div class="diagram" id="">
+        <img id="diaimg" src="img/diagram.jpg">
+        <h1>公司简介</h1>
+        <span class="fistp">发布者:万科集团     浏览次数:2602</span>
+        <div id="content">
+        </div>
+    </div>
+    <div class="news">
+        <div class="newleft">
+            <img id="diaimgTwo" src="img/diagram.jpg}">
+            <h1>入户调查动态（十四）</h1>
+            <p>2017年7月29日，万科企业股份有限公司（以下简称万科集团）与中国节能环保集团公司（以下简称中国节能）在北京签署战略合作协议，中国节能董事长刘大山、总经理王彤...</p>
+            <a class="detailinfo" href="javascript:;">详细信息&nbsp;&nbsp;&gt;</a>
+        </div>
+        <div class="newright">
+            <h1>相关新闻</h1>
+            <p>2017.07.11  张仪村路东侧棚改征收一问一答 </p>
+            <p>2017.07.15  入户调查动态（二）</p>
+            <p>2017.07.15  入户调查动态（三）</p>
+            <p>2017.08.01  致住户和产权单位的一封信（一）</p>
+            <p>2017.07.15  入户调查动态（二）</p>
+            <p>2017.08.17  凝聚群众力量！共建美好家园！</p>
+        </div>
+    </div>
+</div>
+</body>
+<script inline="javascript">
+    var pathname = window.location.pathname;
+    var url = getRootPath()+'/page/getContentByCode';
+    var htmlCode =pathname.substring(pathname.length-1,pathname.length);
+    $.ajax({
+        type:"get",
+        url:url,
+        dataType:"json",
+        data:{"htmlCode":htmlCode},
+        success:function(data) {
+            if(data.data !=null){
+            $("#content").append(data.data.content.toString());
+            }
+        }
+    });
+</script>
+</html>

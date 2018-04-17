@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8"/>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>添加目录规则</title>
+    <!-- Bootstrap -->
+    <link th:href="@{bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link th:href="@{font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- NProgress -->
+    <!--<link th:href="@{nprogress/nprogress.css" rel="stylesheet">-->
+    <!-- Custom Theme Style -->
+    <link th:href="@{custom/css/custom.min.css}" rel="stylesheet">
+    <link th:href="@{ztree/zTreeStyle.css}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <!-- sidebar menu -->
+            <div th:replace="manager/partial/sidebarMenu :: sidebarmenu">
+            </div>
+        </div>
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu">
+                <nav>
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- /top navigation -->
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>显示目录</h3>
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>添加目录</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <form id="add-menu" class="form-horizontal form-label-left">
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                               for="name">目录名称<span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input id="name" class="form-control col-md-7 col-xs-12"
+                                                   required="required"
+                                                   name="name" placeholder="请输入目录名称" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="state">状态<span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input id="state" name="state" value="0" type="radio">禁用
+                                            <input id="state" name="state" value="1" type="radio">启用
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >显示菜单<span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="tab-pane active">
+                                                <!-- 插入树 -->
+                                                <input type="hidden" name="selAuthId" id="selAuthId">
+                                                <ul id="treeDemo" class="ztree">
+
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-9 col-md-offset-5">
+                                            <input class="btn btn-primary" type="reset" value="重置"/>
+                                            <button type="button" class="btn btn-success" id="send" onclick="addMenu()">
+                                                提交
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer th:replace="manager/partial/footer :: footer">
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+<script th:src="@{js/jquery.min.js}"></script>
+<script th:src="@{bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{fastclick/lib/fastclick.js}"></script>
+<script th:src="@{validator/validator.js}"></script>
+<script th:src="@{custom/js/custom.min.js}"></script>
+<script th:src="@{js/tools.js}"></script>
+<script>
+    var _treeUrl= getRootPath() + "/loadallmenu";
+</script>
+<script th:src="@{ztree/ztreeCheckBoxNode.js}"></script>
+<script th:src="@{ztree/jquery.ztree.core-3.5.js}"></script>
+<script th:src="@{ztree/jquery.ztree.excheck-3.5.js}"></script>
+<script th:inline="javascript">
+    //加载权限树
+    function loadAuthTree() {
+        var tree = $.fn.zTree.init($("#treeDemo"), setting);
+    }
+    loadAuthTree();
+    function addMenu() {
+        if (!validator.checkAll($('form'))) {
+            console.log('校验失败');
+            return;
+        }
+        var treeObj=$.fn.zTree.getZTreeObj("treeDemo");
+        var selNodes=treeObj.getCheckedNodes(true);
+        var selAuthId = "";
+        for(var i=0;i<selNodes.length;i++){
+            selAuthId+=selNodes[i].id + ",";
+            //alert(selNodes[i].id+"==="+selNodes[i].name); //获取选中节点的值
+        }
+        if(selAuthId == ""){
+            layer.msg('请选择权限!', {icon: 5,time:1000});
+            return false;
+        }
+        $("#selAuthId").val(selAuthId);
+        var formData = new FormData(document.getElementById("add-menu"));
+        $.ajax({
+            type: "post",
+            url: getRootPath() + "/indexmenu",
+            cache: false,
+            dataType: 'json',
+            data: formData,
+            processData: false,
+            contentType: false,
+            async: false,
+            success: function (data) {
+                if (data.code == 1) {
+                    alert("添加成功。");
+                    window.location.reload();
+                } else {
+                    alert(data.msg);
+                }
+            },
+            error: function (data) {
+                alert("出现错误，请联系管理员。" + data);
+            }
+        });
+    }
+    function initMenuState() {
+        var menuState =[[${#httpSession.getAttribute('menuState')}]];
+        if(menuState != null){
+            $('body').attr('class',menuState);
+        }
+    }
+    //      初始化 页面菜单状态
+    $(function () {
+        initMenuState();
+    })
+</script>
+</body>
+</html>
