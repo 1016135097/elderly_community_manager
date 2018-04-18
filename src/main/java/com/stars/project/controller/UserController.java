@@ -6,13 +6,12 @@ import com.stars.project.model.entity.SystemUserEntity;
 import com.stars.project.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import lombok.Getter;
+import org.springframework.web.bind.annotation.*;
+
+
 import javax.servlet.http.HttpSession;
 
-@Getter
+
 @Controller
 @RequestMapping("/login")
 public class UserController {
@@ -22,10 +21,9 @@ public class UserController {
     public String index(){
         return "login/index";
     }
-
-
     @PostMapping("/login")
-    public ResponseEntity checkUser(SystemUserEntity user, HttpSession session){
+    @ResponseBody
+    public ResponseEntity login(SystemUserEntity user, HttpSession session){
         System.out.println(user.toString());
         ResponseEntity entity = systemService.checkUser(user);
         //登录的授权处理

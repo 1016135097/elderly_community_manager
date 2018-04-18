@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -31,11 +32,22 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         registry.addResourceHandler(
                 "/images/**",
                 "/css/**",
-                "/js/**")
+                "/bootstrap/**","/custom/**","/datatables/**","/fastclick/**","/font-awesome/**","/html/**",
+                "/img/**","/summernote/**","/validator/**","/ztree/**","/js/**")
                 .addResourceLocations(
                         "classpath:/static/images/",
                         "classpath:/static/css/",
-                        "classpath:/static/js/");
+                        "classpath:/static/js/",
+                        "classpath:/static/bootstrap/",
+                        "classpath:/static/custom/",
+                        "classpath:/static/datatables/",
+                        "classpath:/static/fastclick/",
+                        "classpath:/static/font-awesome/",
+                        "classpath:/static/font-html/",
+                        "classpath:/static/img/",
+                        "classpath:/static/summernote/",
+                        "classpath:/static/validator/",
+                        "classpath:/static/ztree/");
         super.addResourceHandlers(registry);
     }
 
@@ -46,7 +58,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //拦截规则：除了login，其他都拦截判断
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/login/index");
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/login/index").excludePathPatterns("/login/login");
         super.addInterceptors(registry);
     }
 

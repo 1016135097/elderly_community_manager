@@ -32,7 +32,7 @@
         <!-----页面右侧透明背景----->
         <div class="box-bg"></div>
         <!--------表单内容------------>
-        <form action="login" method="post" name="frmLogin" id="loginForm">
+        <form action="checkUser" method="post" name="frmLogin" id="loginForm">
             <div class="form">
                 <h1>登录平台</h1>
                 <div class="item clearfix">
@@ -78,13 +78,12 @@
                     }
                 },
                 error:function (data) {
+                    console.info(data);
                     alert("出现错误，请联系管理员。");
                 }
             });
         }
     }
-
-
 
 
     function submitFormPwd() {

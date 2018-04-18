@@ -28,6 +28,8 @@ spring:
   thymeleaf:
     cache: false
     mode: LEGACYHTML5
+    prefix: classpath:/templates/
+    suffix: .html
 #查看运行情况。是否敏感
 management:
   security:
