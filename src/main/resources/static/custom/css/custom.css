@@ -268,19 +268,26 @@ html , body{
 }
 .profile_info {
     padding: 25px 10px 10px;
-    width: 65%;
-    float: left
+    width: 100%;
+    float: left;
+    position: relative
 }
 .profile_info span {
     font-size: 13px;
     line-height: 30px;
-    color: #BAB8B8
+    width: 30%;
+    color: #BAB8B8;
+    position: absolute
 }
 .profile_info h2 {
-    font-size: 14px;
+    font-size: 13px;
     color: #ECF0F1;
+    width : 70%;
+    padding-left :30%;
     margin: 0;
-    font-weight: 300
+    line-height: 30px;
+    font-weight: 300;
+    display: block
 }
 .profile.img_2 {
     text-align: center

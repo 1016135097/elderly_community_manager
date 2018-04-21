@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-  <head>
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -13,58 +13,58 @@
     <link th:href="@{~/font-awesome/css/font-awesome.css}" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link th:href="@{~/custom/css/custom.css}" rel="stylesheet">
-      <link rel="stylesheet" th:href="@{~/css/home.css}">
-      <title>老年人系统</title>
-  </head>
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
+    <link rel="stylesheet" th:href="@{~/css/home.css}">
+    <title>老年人系统</title>
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
         <div class="col-md-3 left_col">
             <br />
             <!-- sidebar menu -->
             <!-- 嵌入菜单页面-->
-            <div th:replace="manager/partial/sidebarMenu :: sidebarmenu">
+            <div th:replace="manager/partial/sidebarSystemMenu :: sidebarmenu">
             </div>
             <!-- /sidebar menu -->
-          </div>
+        </div>
 
-      </div>
-        <!-- page content -->
-        <div class="container" role="main">
-            <div class="home-text">
-                <p>欢迎来到 :<span>老年人系统</span></p>
-                <p><span id="time" style="letter-spacing: 2.5px;font-weight: bold ;font-size: 40px"></span><i id="datetime" ></i></p>
-                <!--<div><div>09:00</div><div>2017/09/18&nbsp;&nbsp;星期二</div></div>-->
-            </div>
-            <div class="home-box">
+    </div>
+    <!-- page content -->
+    <div class="container" role="main">
+        <div class="home-text">
+            <p>欢迎来到 :<span>老年人系统</span></p>
+            <p><span id="time" style="letter-spacing: 2.5px;font-weight: bold ;font-size: 40px"></span><i id="datetime" ></i></p>
+            <!--<div><div>09:00</div><div>2017/09/18&nbsp;&nbsp;星期二</div></div>-->
+        </div>
+        <div class="home-box">
 
-                <div class="home-box-model">
-                    <div class="bg01">
-                        <div class="text-box">
-                            <a th:href="@{~/manager/queryPersonalMenu}">个人信息</a>
-                            <p>修改个人信息</p>
-                        </div>
+            <div class="home-box-model">
+                <div class="bg01">
+                    <div class="text-box">
+                        <a th:href="@{~/manager/queryPersonalMenu}">用户信息</a>
+                        <p>用户管理菜单</p>
                     </div>
-                    <div class="bg03">
-                        <div class="text-box">
-                            <a href="javascript:;">老年人信息</a>
-                            <p>查看领取的任务</p>
-                        </div>
+                </div>
+                <div class="bg03">
+                    <div class="text-box">
+                        <a href="javascript:;">老年人信息</a>
+                        <p>老年人管理</p>
                     </div>
-
                 </div>
 
             </div>
-        </div>
-        </div>
-        <!-- /page content -->
 
-    <!-- jQuery -->
-    <script th:src="@{~/js/jquery/jquery.min.js}"></script>
-    <!-- Bootstrap -->
-    <script th:src="@{~/bootstrap/dist/js/bootstrap.js}"></script>
-    <script th:src="@{~/custom/js/custom.js}"></script>
-    <script th:inline="javascript">
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+
+<!-- jQuery -->
+<script th:src="@{~/js/jquery/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{~/bootstrap/dist/js/bootstrap.js}"></script>
+<script th:src="@{~/custom/js/custom.js}"></script>
+<script th:inline="javascript">
     $(function () {
         var date = new Date();
         var year = date.getFullYear();
@@ -86,5 +86,5 @@
     })
 
 </script>
-  </body>
+</body>
 </html>

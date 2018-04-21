@@ -16,120 +16,145 @@
   </head>
 
   <body class="nav-md">
-  <div class="container">
-      <div class="main_container">
+  <div class="container body" id="mainid">
+    <div class="main_container">
+      <div class="col-md-3 left_col" id="menuid">
+        <!-- sidebar menu -->
+        <div th:replace="manager/partial/sidebarSystemMenu :: sidebarmenu">
+        </div>
+      </div>
+      <!-- top navigation -->
+      <div class="top_nav" id ="topid">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <!-- /top navigation -->
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>用户管理</h3>
+            </div>
+          </div>
+          <div class="clearfix"></div>
 
-          <!-- page content -->
-          <div class="right_col" role="main">
-              <div class="">
-                  <div class="page-title">
-                      <div class="title_left">
-                          <h3>用户管理</h3>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>添加用户</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <form id="add-user" class="form-horizontal form-label-left" novalidate>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userName">姓名<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="userName" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="userName" placeholder="请输入姓名" required="required" type="text">
                       </div>
-                  </div>
-            <div class="clearfix"></div>
-
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>添加用户</h2>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <form id="add-user" class="form-horizontal form-label-left" novalidate>
-                      <input type="hidden" id="userId" value=0 name="id"/>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userName">姓名<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="userName" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="userName" placeholder="请输入姓名" required="required" type="text">
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idNumber">身份证号 <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="identityCodeValid" id="idNumber" name="idNumber" required="required" class="form-control col-md-7 col-xs-12" placeholder="请输入身份证号">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">登录名<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="name" name="name" required="required" placeholder="请输入登录名" class="form-control col-md-7 col-xs-12">
+                      </div>
+                    </div>
+                    <div id="types" class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="type">用户类型</label>
+                      <div class="col-md-1 col-sm-1 col-xs-12">
+                        <select class="form-control" id="type" name="type">
+                          <option value="0">普通hr</option>
+                          <option value="1">管理员</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">邮箱 <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12" placeholder="请输入邮箱">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">确认邮箱 <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="email" id="email2" name="confirm_email" data-validate-linked="email" required="required" class="form-control col-md-7 col-xs-12" placeholder="请输入确认邮箱">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">性别</label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div id="sex" class="btn-group" data-toggle="buttons" required>
+                          <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" required>
+                            <input type="radio" name="sex" value="0" required> &nbsp;男 &nbsp;
+                          </label>
+                          <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                            <input type="radio" name="sex" value="1" >&nbsp;女 &nbsp;
+                          </label>
                         </div>
                       </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idNumber">身份证号 <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="identityCodeValid" id="idNumber" name="idNumber" required="required" class="form-control col-md-7 col-xs-12" placeholder="请输入身份证号">
-                        </div>
+                    </div>
+                    <div class="item form-group">
+                      <label for="password" class="control-label col-md-3">密码</label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="password" type="password" name="password"  class="form-control col-md-7 col-xs-12" required="required" placeholder="请输入密码">
                       </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="loginName">登录名<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="loginName" name="name" required="required" placeholder="请输入登录名" class="form-control col-md-7 col-xs-12">
-                        </div>
+                    </div>
+                    <div class="item form-group">
+                      <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">重复密码</label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="password2" type="password" name="password2" data-validate-linked="password" class="form-control col-md-7 col-xs-12" required="required" placeholder="请输入重复密码">
                       </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">邮箱 <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12" placeholder="请输入邮箱">
-                        </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="age">年龄 <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="number" id="age" name="age"  required="required"  class="form-control col-md-7 col-xs-12" placeholder="请输入年龄">
                       </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">确认邮箱 <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="email" id="email2" name="confirm_email" data-validate-linked="email" required="required" class="form-control col-md-7 col-xs-12" placeholder="请输入确认邮箱">
-                        </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mobile">电话 <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="tel" id="mobile" name="mobile" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12" placeholder="请输入电话">
                       </div>
-
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">性别</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div id="gender" class="btn-group" data-toggle="buttons" required>
-                            <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" required>
-                              <input type="radio" name="sex" value="0" required> &nbsp;男 &nbsp;
-                            </label>
-                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="sex" value="1" >&nbsp;女 &nbsp;
-                            </label>
-                          </div>
-                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="col-md-9 col-md-offset-5">
+                        <a type="button" class="btn btn-primary" th:href="@{/manager}">取消</a>
+                        <button class="btn btn-primary" type="reset">重置</button>
+                        <button id="send" type="button" class="btn btn-success" onclick="addUser()">提交</button>
                       </div>
-                      <div class="item form-group">
-                        <label for="password" class="control-label col-md-3">密码</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="password" type="password" name="password"  class="form-control col-md-7 col-xs-12" required="required" placeholder="请输入密码">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">重复密码</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="password2" type="password" name="password2" data-validate-linked="password" class="form-control col-md-7 col-xs-12" required="required" placeholder="请输入重复密码">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="age">年龄 <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="number" id="age" name="age"  required="required"  class="form-control col-md-7 col-xs-12" placeholder="请输入年龄">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telNumber">电话 <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="tel" id="telNumber" name="mobile" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12" placeholder="请输入电话">
-                        </div>
-                      </div>
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-9 col-md-offset-5">
-                          <a type="button" class="btn btn-primary" th:href="@{/manager}">取消</a>
-                          <button class="btn btn-primary" type="reset">重置</button>
-                          <button id="send" type="button" class="btn btn-success" onclick="addUser()">提交</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- /page content -->
+      </div>
     </div>
   </div>
     <script th:src="@{~/js/jquery/jquery.min.js}"></script>
@@ -140,6 +165,7 @@
     <script th:src="@{~/custom/js/custom.js}"></script>
     <script th:src="@{~/js/common/tools.js}"></script>
   <script th:inline="javascript">
+      var type = '0';
       function addUser() {
           if (!validator.checkAll($('form'))) {
               console.log('校验失败');
@@ -147,7 +173,7 @@
           }
         var url = getRootPath()+"/addUser";
           console.info($("#add-user").serialize());
-        $.ajax({
+          $.ajax({
             type:"post",
             url:url,
             dataType:'json',
@@ -155,12 +181,22 @@
             async:false,
             success:function(data) {
                 if(data.code==1){
-                    layer.open({
-                        content: '注册成功！',
-                        yes: function(layero, index){
-                            window.location.href=getRootPath()+"/index";
+                    if(type=='0'){
+                        layer.open({
+                            content: '注册成功！',
+                            yes: function(layero, index){
+                                window.location.href=getRootPath()+"/index";
+                            }
+                        });
+                    }else{
+                        var result = confirm("添加成功，是否继续添加？");
+                        if(result){//true
+                            $("button[type=reset]").trigger("click");
+                        } else { //false
+                            window.location.href="/login/manager?type=1";
                         }
-                    });
+                    }
+
                 }else {
                     alert("操作信息："+data.msg);
                 }
@@ -170,6 +206,20 @@
             }
         });
       }
+      $(function(){
+          type = [[${type}]];
+          if(type == '0'){
+              $('#types').hide();
+              $('#menuid').hide();
+              $('#topid').hide();
+              $("#mainid").attr("class", "container");
+          }else{
+              $('#types').show();
+              $('#menudiv').show();
+              $('#topid').show();
+              $("#mainid").attr("class", "container body");
+          }
+      });
 
     </script>
   </body>

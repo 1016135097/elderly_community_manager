@@ -79,4 +79,20 @@ public class SystemService {
             return new ErrorResponseEntity(e.getMessage());
         }
     }
+    public ResponseEntity modifySystemUser(SystemUserEntity user){
+        try {
+            systemUserDao.save(user);
+            return new SuccessResponseEntity(SystemConst.OPERATION_OK, user);
+        }catch (Exception e){
+            return new ErrorResponseEntity(e.getMessage());
+        }
+    }
+    public ResponseEntity selectSystemUserById(long id){
+        try {
+            SystemUserEntity userInfo =systemUserDao.findOne(id);
+            return new SuccessResponseEntity(SystemConst.OPERATION_OK, userInfo);
+        }catch (Exception e){
+            return new ErrorResponseEntity(e.getMessage());
+        }
+    }
 }

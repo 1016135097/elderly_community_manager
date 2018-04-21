@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>website manager</title>
+    <!-- Bootstrap -->
+    <link th:href="@{~/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link th:href="@{~/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link th:href="@{~/custom/css/custom.css}" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <!-- sidebar menu -->
+            <div th:replace="manager/partial/sidebarMenu :: sidebarmenu">
+            </div>
+        </div>
+        <!-- top navigation -->
+        <div th:replace="manager/partial/navigation :: navigation">
+        </div>
+        <!-- /top navigation -->
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>用户管理</h3>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>添加用户</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <form id="personal" class="form-horizontal form-label-left" novalidate>
+                                    <input type="hidden" id="id" name="id"/>
+                                    <input type="hidden" id="createTime" name="createTime"/>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userName">姓名<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input id="userName" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="userName" placeholder="请输入姓名" required="required" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">登录名<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" id="name" name="name" required="required" placeholder="请输入登录名" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idNumber">身份证号 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="identityCodeValid" id="idNumber" name="idNumber" required="required" class="form-control col-md-7 col-xs-12" placeholder="请输入身份证号">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">邮箱 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12" placeholder="请输入邮箱">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">性别</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div id="sex" class="btn-group" data-toggle="buttons" required>
+                                                <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" required>
+                                                    <input type="radio" name="sex" value="0" required> &nbsp;男 &nbsp;
+                                                </label>
+                                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                    <input type="radio" name="sex" value="1" >&nbsp;女 &nbsp;
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label for="password" class="control-label col-md-3">密码</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input id="password" type="password" name="password" class="form-control col-md-7 col-xs-12" required="required" placeholder="请输入密码">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="age">年龄 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="number" id="age" name="age"  required="required"  class="form-control col-md-7 col-xs-12" placeholder="请输入年龄">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mobile">电话 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="tel" id="mobile" name="mobile" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12" placeholder="请输入电话">
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-9 col-md-offset-5">
+
+                                            <button id="send" type="button" class="btn btn-success" onclick="modifySystemUser()">保存</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+    </div>
+</div>
+<script th:src="@{~/js/jquery/jquery.min.js}"></script>
+<script th:src="@{~/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{~/fastclick/lib/fastclick.js}"></script>
+<script th:src="@{~/validator/validator.js}"></script>c
+<script th:src="@{~/custom/js/custom.js}"></script>
+<script th:src="@{~/js/common/tools.js}"></script>
+<script th:inline="javascript">
+    $(function () {
+        var url = '/manager/queryPersonal';
+        $.ajax({
+            type:"get",
+            url:url,
+            dataType:"json",
+            success:function(data) {
+                initForm(data);
+            }
+        });
+    })
+    function  initForm(data) {
+        $('#userName').val(data.data.userName);
+        $('#name').val(data.data.name);
+        $('#idNumber').val(data.data.idNumber);
+        $('#email').val(data.data.email);
+        $('#password').val(data.data.password);
+        $(":radio[name='sex'][value='" + data.data.sex + "']").parent('label').addClass('active');
+        $('#mobile').val(data.data.mobile);
+        $('#age').val(data.data.age);
+        $('#id').val(data.data.id);
+        $('#createTime').val(timestampToTime(data.data.createTime));
+    }
+
+
+
+    function modifySystemUser() {
+        if (!validator.checkAll($('form'))) {
+            console.log('校验失败');
+            return;
+        }
+        console.info($("#personal").serialize());
+        var url = "/login/modifySystemUser";
+        $.ajax({
+            type:"post",
+            url:url,
+            dataType:'json',
+            data:$("#personal").serialize(),
+            async:false,
+            success:function(data) {
+                if(data.code==1){
+                    alert("修改成功");
+
+                }else {
+                    alert("操作信息："+data.msg);
+                }
+            },
+            error:function (data) {
+                alert("出现错误，请联系管理员。");
+            }
+        });
+    }
+    function timestampToTime(timestamp) {
+        var date = new Date(timestamp );//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y+M+D+h+m+s;
+    }
+
+</script>
+</body>
+</html>

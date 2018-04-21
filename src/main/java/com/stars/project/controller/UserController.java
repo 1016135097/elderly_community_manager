@@ -6,10 +6,13 @@ import com.stars.project.model.entity.SystemUserEntity;
 import com.stars.project.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.Service;
 
 
 @Controller
@@ -24,12 +27,12 @@ public class UserController {
     @PostMapping("/login")
     @ResponseBody
     public ResponseEntity login(SystemUserEntity user, HttpSession session){
-        System.out.println(user.toString());
         ResponseEntity entity = systemService.checkUserByName(user);
         //登录的授权处理
         if (entity.getCode() == 1) {
             session.setAttribute(SystemConst.USER, (SystemUserEntity) entity.getData());
             session.setAttribute(SystemConst.USERNAME, ((SystemUserEntity) entity.getData()).getName());
+            session.setAttribute("userid", ((SystemUserEntity) entity.getData()).getId());
         }
         entity.setData(null);
         return entity;
@@ -46,20 +49,30 @@ public class UserController {
         ResponseEntity entity = systemService.updatePassword(user);
         return entity;
     }
+
+    @PostMapping("/modifySystemUser")
+    @ResponseBody
+    public ResponseEntity modifySystemUser(SystemUserEntity user){
+        ResponseEntity entity = systemService.modifySystemUser(user);
+        return entity;
+    }
     /**
      * 获取后台首页
      * @return
      */
     @GetMapping("/manager")
-    public String   manager(){
-        return "manager/index";
+    public String  manager(HttpServletRequest request){
+        String type=request.getParameter("type");
+        if("0".equals(type))
+            return "manager/index";
+        return "manager/systemindex";
     }
     /**
      * 跳转到用户修改页面
      * @return
      */
     @GetMapping("/userModify")
-    public String userModify(){
+    public String userModify() {
         return "login/userModify";
     }
 
@@ -68,7 +81,11 @@ public class UserController {
      * @return
      */
     @GetMapping("/addUserMenu")
-    public String addUser() { return "login/userAdd"; }
+    public String addUserMenu(Model model,HttpServletRequest request) {
+        String type=request.getParameter("type");
+        model.addAttribute("type", type);
+        return "login/userAdd";
+    }
 
     /**
      * 添加用户

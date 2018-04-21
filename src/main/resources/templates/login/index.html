@@ -46,7 +46,7 @@
                            autocomplete="off" placeholder="请输入密码" />
                 </div>
                 <div class="item itemRadio clearfix">
-                    <input  type="checkbox" style="float: left;width:13px;height: 25px" id="radioPass"  onclick="checkbox();">管理员</input>
+                    <input  type="checkbox" style="float: left;width:13px;height: 25px" id="radioPass" >管理员</input>
                 </div>
                 <div class="item">
                     <button type="button" tabindex="2" onclick="loginSubmit();" id="btnSubmit2" onkeydown="javascript:if(event.keyCode==13){event.returnValue = false}">登&nbsp;&nbsp;录</button>
@@ -63,25 +63,19 @@
 <!-- 修改密码弹窗结束-->
 <script type="text/javascript">
     var data={};
-    var checkSign = false;
-    function checkbox() {
-        if (checkSign==true) {
-            $("#radioPass").checked="";
-            checkSign=false;
-        } else if(checkSign==false) {
-            $("#radioPass").checked="checked";
-            checkSign=true;
-        }
-    }
+
+    var type = 0;
     function loginSubmit() {
         if (verification()) {
             var url=getRootPath()+"/login";
             var userName = $("#userNameIpt").val();
             var loginInfo = userName+" ";
-            if(checkSign){
+            if($("input[type='checkbox']").prop('checked')){
                 data.type = 1;
+                type = 1;
             }else{
                 data.type = 0;
+                type = 0;
             }
             data.name = $('#userNameIpt').val();
             data.password = $('#password').val();
@@ -94,7 +88,7 @@
                 async:false,
                 success:function(data) {
                     if(data.code==1){
-                        window.location.href=getRootPath()+"/manager";
+                        window.location.href=getRootPath()+"/manager?type="+type;
                     }else {
                         alert("操作信息："+data.msg);
                     }
@@ -111,7 +105,7 @@
         window.location.href=getRootPath()+"/userModify";
     }
     function addUser(){
-        window.location.href=getRootPath()+"/addUserMenu";
+        window.location.href=getRootPath()+"/addUserMenu?type=0";
     }
 </script>
 
