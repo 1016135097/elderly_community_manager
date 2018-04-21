@@ -29,6 +29,7 @@ PRIMARY KEY (`id`)
 CREATE TABLE `system_user` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT,
 `name` varchar(20) NULL COMMENT '用户名',
+`user_name` varchar(20) NULL COMMENT '姓名',
 `sex` int(2) NULL COMMENT '性别',
 `age` int(4) NULL COMMENT '年龄',
 `mobile` varchar(20) NULL COMMENT '手机号',

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>website manager</title>
+  <!-- Bootstrap -->
+  <link th:href="@{~/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link th:href="@{~/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+  <!-- Custom Theme Style -->
+  <link th:href="@{~/custom/css/custom.min.css}" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+<div class="container">
+  <div class="main_container">
+    <!-- page content -->
+    <div class="right_col" role="main">
+      <div class="">
+        <div class="page-title">
+          <div class="title_left">
+            <h3>修改用户密码</h3>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row" id="panel1">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>输入需要修改密码的用户</h2>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <form id="queryUser" class="form-horizontal form-label-left" novalidate>
+                  <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">用户名<span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="请输入姓名" required="required" type="text">
+                    </div>
+                  </div>
+                  <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idNumber">身份证号 <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="identityCodeValid" id="idNumber" name="idNumber" required="required" class="form-control col-md-7 col-xs-12" placeholder="请输入身份证号">
+                    </div>
+                  </div>
+
+                  <div class="ln_solid"></div>
+                  <div class="form-group">
+                    <div class="col-md-9 col-md-offset-5">
+                      <a type="cancle" class="btn btn-primary" th:href="@{/index}">取消</a>
+                      <button id="query" type="button" class="btn btn-success" onclick="queryUser()">查询</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="panel2" class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>请输入新的密码</h2>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <form id="modifyUser" class="form-horizontal form-label-left" novalidate>
+                  <input type="hidden" id="userId" th:value="${#httpServletRequest.getAttribute('id')}" name="id"/>
+                  <div class="item form-group">
+                    <label for="password" class="control-label col-md-3">新密码</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input id="password" type="password" name="password" class="form-control col-md-7 col-xs-12" required="required" placeholder="请输入新密码">
+                    </div>
+                  </div>
+                  <div class="item form-group">
+                    <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">重复密码</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input id="password2" type="password" name="password2" data-validate-linked="password" class="form-control col-md-7 col-xs-12" required="required" placeholder="请再次输入新密码">
+                    </div>
+                  </div>
+                  <div class="ln_solid"></div>
+                  <div class="form-group">
+                    <div class="col-md-9 col-md-offset-5">
+                      <a type="cancle" class="btn btn-primary" th:href="@{/index}">取消</a>
+                      <button id="send" type="button" class="btn btn-success" onclick="modifyUser()">确认</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+</div>
+<script th:src="@{~/js/jquery/jquery.min.js}"></script>
+<script th:src="@{~/layer/layer.js}"></script>
+<script th:src="@{~/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{~/fastclick/lib/fastclick.js}"></script>
+<script th:src="@{~/validator/validator.js}"></script>
+<script th:src="@{~/custom/js/custom.js}"></script>
+<script th:src="@{~/js/common/tools.js}"></script>
+    <script th:inline="javascript">
+    $(function () {
+        $('#panel2').hide();
+    });
+  var id='';
+  var password='';
+  function modifyUser() {
+      if (!validator.checkAll($('#modifyUser'))) {
+          console.log('校验失败');
+          return;
+      }
+      if(password == $('#password').val()){
+          layer.alert("新密码不能与原密码一样！");
+          return;
+      }
+      var url = getRootPath()+"/updatePassword";
+      $.ajax({
+          type:"post",
+          url:url,
+          dataType:'json',
+          data:{"id":id,"password":$('#password').val()},
+          async:false,
+          success:function(data) {
+              if(data.code==1){
+                  layer.open({
+                      content: '修改成功',
+                      yes: function(layero, index){
+                          window.location.href=getRootPath()+"/index";
+                      }
+                  });
+                  //window.location.href=getRootPath()+"/index";
+              }else {
+                  alert("操作信息："+data.msg);
+              }
+          },
+          error:function (data) {
+              alert("出现错误，请联系管理员。");
+          }
+      });
+  }
+  function queryUser(){
+      if (!validator.checkAll($('#queryUser'))) {
+          console.log('校验失败');
+          return;
+      }
+      var url = getRootPath()+"/queryUserByNameAndIdNumber";
+      $.ajax({
+          type:"post",
+          url:url,
+          dataType:'json',
+          data:{"name":$('#name').val(),"idNumber":$('#idNumber').val()},
+          async:false,
+          success:function(data) {
+              if(data.code==1){
+                  id=data.data.id;
+                  password=data.data.password;
+                  $('#panel2').show();
+                  $('#panel1').hide();
+                  //window.location.href=getRootPath()+"/index";
+              }else {
+                  alert("操作信息："+data.msg);
+              }
+          },
+          error:function (data) {
+              alert("出现错误，请联系管理员。");
+          }
+      });
+  }
+
+</script>
+</body>
+</html>

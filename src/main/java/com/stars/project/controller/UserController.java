@@ -25,13 +25,25 @@ public class UserController {
     @ResponseBody
     public ResponseEntity login(SystemUserEntity user, HttpSession session){
         System.out.println(user.toString());
-        ResponseEntity entity = systemService.checkUser(user);
+        ResponseEntity entity = systemService.checkUserByName(user);
         //登录的授权处理
         if (entity.getCode() == 1) {
             session.setAttribute(SystemConst.USER, (SystemUserEntity) entity.getData());
             session.setAttribute(SystemConst.USERNAME, ((SystemUserEntity) entity.getData()).getName());
         }
         entity.setData(null);
+        return entity;
+    }
+    @PostMapping("/queryUserByNameAndIdNumber")
+    @ResponseBody
+    public ResponseEntity queryUserByNameAndIdNumber(SystemUserEntity user){
+        ResponseEntity entity = systemService.checkUserByNameAndIdNumber(user);
+        return entity;
+    }
+    @PostMapping("/updatePassword")
+    @ResponseBody
+    public ResponseEntity updatePassword(SystemUserEntity user){
+        ResponseEntity entity = systemService.updatePassword(user);
         return entity;
     }
     /**
@@ -41,5 +53,32 @@ public class UserController {
     @GetMapping("/manager")
     public String   manager(){
         return "manager/index";
+    }
+    /**
+     * 跳转到用户修改页面
+     * @return
+     */
+    @GetMapping("/userModify")
+    public String userModify(){
+        return "login/userModify";
+    }
+
+    /**
+     * 跳转到添加用户页面
+     * @return
+     */
+    @GetMapping("/addUserMenu")
+    public String addUser() { return "login/userAdd"; }
+
+    /**
+     * 添加用户
+     * @param user
+     * @return
+     */
+    @PostMapping("/addUser")
+    @ResponseBody
+    public ResponseEntity addUser(SystemUserEntity user){
+        ResponseEntity entity = systemService.saveUser(user);
+        return entity;
     }
 }

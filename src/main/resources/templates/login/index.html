@@ -46,11 +46,15 @@
                            autocomplete="off" placeholder="请输入密码" />
                 </div>
                 <div class="item itemRadio clearfix">
-                    <a href="#" onclick="modifyPassword()" style="float: right;">忘记密码?</a>
+                    <input  type="checkbox" style="float: left;width:13px;height: 25px" id="radioPass"  onclick="checkbox();">管理员</input>
                 </div>
-
                 <div class="item">
-                    <button type="button" tabindex="5" onclick="loginSubmit();" id="btnSubmit" onkeydown="javascript:if(event.keyCode==13){event.returnValue = false}">登&nbsp;&nbsp;录</button>
+                    <button type="button" tabindex="2" onclick="loginSubmit();" id="btnSubmit2" onkeydown="javascript:if(event.keyCode==13){event.returnValue = false}">登&nbsp;&nbsp;录</button>
+                </div>
+                <div class="item itemRadio clearfix">
+                    <a href="#" onclick="addUser()" style="float: left;">免费注册</a>
+
+                    <a href="#" onclick="modifyPassword()" style="float: right;">忘记密码?</a>
                 </div>
             </div>
         </form>
@@ -58,17 +62,35 @@
 </div>
 <!-- 修改密码弹窗结束-->
 <script type="text/javascript">
+    var data={};
+    var checkSign = false;
+    function checkbox() {
+        if (checkSign==true) {
+            $("#radioPass").checked="";
+            checkSign=false;
+        } else if(checkSign==false) {
+            $("#radioPass").checked="checked";
+            checkSign=true;
+        }
+    }
     function loginSubmit() {
         if (verification()) {
             var url=getRootPath()+"/login";
             var userName = $("#userNameIpt").val();
             var loginInfo = userName+" ";
+            if(checkSign){
+                data.type = 1;
+            }else{
+                data.type = 0;
+            }
+            data.name = $('#userNameIpt').val();
+            data.password = $('#password').val();
             $.cookie("loginInfo", loginInfo);
             $.ajax({
                 type:"post",
                 url:url,
                 dataType:'json',
-                data:{"name":$('#userNameIpt').val(),"password":$('#password').val()},
+                data:data,
                 async:false,
                 success:function(data) {
                     if(data.code==1){
@@ -85,95 +107,11 @@
         }
     }
 
-
-    function submitFormPwd() {
-        if($("#password2").val() == "") {
-            alert("请输入原密码");
-            return;
-        }
-        if($("#newPwd").val() == "") {
-            alert("请输入新密码");
-            return;
-        }
-        if($("#valiPwd").val() == "") {
-            alert("请输入确认密码");
-            return;
-        }
-        if ($("#password2").val() == $("#newPwd").val()) {
-            alert("原密码和新密码不能一样");
-            return;
-        }
-        var reg = /(?=.*[0-9])(?=.*[a-zA-Z])(?=([\x21-\x7e]+)[^a-zA-Z0-9]).{8,30}/;
-        if(!reg.test($("#newPwd").val())) {
-            alert("新密码必须包含数字，字母及特殊符号,并且在8位以上");
-            return;
-        }
-
-        if($("#newPwd").val() != $("#valiPwd").val()) {
-            alert("新密码必须和确认密码一致");
-            return;
-        }
-
-        $.post("platform/common/changeLoginPassword.do", {
-            header_password : $("#password2").val(),
-            header_newPwd : $("#newPwd").val(),
-            header_valiPwd : $("#valiPwd").val()
-        },function(data){
-            if(data.result == "true") {
-                alert("密码修改成功,请妥善保管");
-                closeFormPwd();
-            } else {
-                alert(data.message);
-            }
-        });
-    }
-
-    function validatePassword(elem){
-        var password = $(elem).val();
-        $.post("platform/common/validateUserPassword.do", {
-            password : $("#password2").val(),
-        },function(data){
-            if(data == "success") {
-                $("#password2Red").hide();
-                $("#password2Green").show();
-            } else {
-                $("#password2Red").show();
-                $("#password2Green").hide();
-            }
-        });
-    }
-
-    function validateOldAndNewPass(elem,elemName){
-        var password = $(elem).val();
-        password=password.replace(/\s+/g, "");
-        var reg = /(?=.*[0-9])(?=.*[a-zA-Z])(?=([\x21-\x7e]+)[^a-zA-Z0-9]).{8,30}/;
-        if(elemName=='newPwd'){
-            if(!reg.test(password)) {
-                $("#newPwdRed").show();
-                $("#newPwdGreen").hide();
-
-                $("#newPwdRed").html('密码不符合规则');
-            }else{
-                $("#newPwdRed").html('');
-
-                $("#newPwdRed").hide();
-                $("#newPwdGreen").show()
-            }
-        }
-        if(elemName=='valiPwd'){
-            if($("#newPwd").val()!=$("#valiPwd").val()){
-                $("#valiPwdRed").html('确认密码和新密码不一致');
-                $("#valiPwdRed").show();
-                $("#valiPwdGreen").hide();
-            }else{
-                $("#valiPwdRed").html('');
-                $("#valiPwdRed").hide();
-                $("#valiPwdGreen").show();
-            }
-        }
-    }
     function modifyPassword(){
-        alert(1)
+        window.location.href=getRootPath()+"/userModify";
+    }
+    function addUser(){
+        window.location.href=getRootPath()+"/addUserMenu";
     }
 </script>
 

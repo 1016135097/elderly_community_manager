@@ -14,7 +14,7 @@
     <!-- Custom Theme Style -->
     <link th:href="@{~/custom/css/custom.css}" rel="stylesheet">
       <link rel="stylesheet" th:href="@{~/css/home.css}">
-      <title>张仪村后台管理页面</title>
+      <title>老年人系统</title>
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -63,7 +63,7 @@
         <!-- page content -->
         <div class="container" role="main">
             <div class="home-text">
-                <p>欢迎来到 :<span>网站后台管理</span></p>
+                <p>欢迎来到 :<span>老年人系统</span></p>
                 <p><span id="time" style="letter-spacing: 2.5px;font-weight: bold ;font-size: 40px"></span><i id="datetime" ></i></p>
                 <!--<div><div>09:00</div><div>2017/09/18&nbsp;&nbsp;星期二</div></div>-->
             </div>
@@ -72,48 +72,32 @@
                 <div class="home-box-model">
                     <div class="bg01">
                         <div class="text-box">
-                            <a href="javascript:;">用户管理</a>
+                            <a href="javascript:;">个人信息</a>
                             <p>管理网站后台用户</p>
                         </div>
                     </div>
                     <div class="bg03">
                         <div class="text-box">
-                            <a href="javascript:;">菜单标题管理</a>
+                            <a href="javascript:;">老年人信息</a>
                             <p>管理官网菜单</p>
                         </div>
                     </div>
 
                 </div>
-                <div class="home-box-model">
-                    <div class="bg02">
-                        <div class="text-box">
-                            <a href="javascript:;">页面内容管理</a>
-                            <p>管理官网页面内容</p>
-                        </div>
-                    </div>
-                    <div class="bg04"><div class="text-box">
-                        <a href="javascript:;">轮播图管理</a>
-                        <p>管理官网轮播图</p>
-                    </div></div>
-                </div>
+
             </div>
         </div>
         </div>
         <!-- /page content -->
 
-        <!-- footer content -->
-      <div th:replace="manager/partial/footer :: footer">
-      </div>
-        <!-- /footer content -->
     <!-- jQuery -->
-    <script th:src="@{~/js/jquery.js}"></script>
+    <script th:src="@{~/js/jquery/jquery.min.js}"></script>
     <!-- Bootstrap -->
     <script th:src="@{~/bootstrap/dist/js/bootstrap.js}"></script>
     <script th:src="@{~/custom/js/custom.js}"></script>
     <script th:inline="javascript">
     $(function () {
         var date = new Date();
-        console.log(date);
         var year = date.getFullYear();
         var month = date.getMonth() + 1;
         var day = date.getDate();

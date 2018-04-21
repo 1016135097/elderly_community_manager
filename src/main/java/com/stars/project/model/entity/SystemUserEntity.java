@@ -26,12 +26,22 @@ public class SystemUserEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   private String name;
+  /**
+   * 用户姓名
+   */
+  private String userName;
+  /**
+   * 0:男 1:女
+   */
   private long sex;
   private long age;
   private String mobile;
   private String idNumber;
   private String email;
   private String password;
+  /**
+   * 用类型0:普通 1：管理员
+   */
   private long type;
   private java.sql.Timestamp createTime;
 

@@ -85,6 +85,23 @@ public class SystemConst {
      */
     public static final String  MSG_LOGIN_USERNAME_ERR = "输入的用户名不正确，请重新输入。";
     /**
+     * 用户名与身份证不匹配
+     */
+    public static final String  MSG_USERNAME_IDNUMBER_ERR = "用户名与身份证不匹配";
+    /**
+     * 普通用户不能以管理员身份登录
+     */
+    public static final String  MSG_TYPE_ERR = "普通用户不能以管理员身份登录";
+
+    /**
+     * 用户名已存在
+     */
+    public static final String  MSG_NAME_ERR = "用户名已存在";
+    /**
+     *
+     */
+    public static final String  CHANGE_SUCCESS = "修改成功";
+    /**
      * 用户默认密码
      */
     public static final String PASSWORD_DEFAULT = "PASSWORD_DEFAULT";

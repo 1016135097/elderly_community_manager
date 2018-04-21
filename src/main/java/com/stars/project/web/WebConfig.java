@@ -33,7 +33,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
                 "/images/**",
                 "/css/**",
                 "/bootstrap/**","/custom/**","/datatables/**","/fastclick/**","/font-awesome/**","/html/**",
-                "/img/**","/summernote/**","/validator/**","/ztree/**","/js/**")
+                "/img/**","/summernote/**","/validator/**","/ztree/**","/js/**","/layer/**")
                 .addResourceLocations(
                         "classpath:/static/images/",
                         "classpath:/static/css/",
@@ -47,7 +47,8 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
                         "classpath:/static/img/",
                         "classpath:/static/summernote/",
                         "classpath:/static/validator/",
-                        "classpath:/static/ztree/");
+                        "classpath:/static/ztree/",
+                        "classpath:/static/layer/");
         super.addResourceHandlers(registry);
     }
 
@@ -58,7 +59,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //拦截规则：除了login，其他都拦截判断
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/login/index").excludePathPatterns("/login/login");
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/login/**");
         super.addInterceptors(registry);
     }
 
