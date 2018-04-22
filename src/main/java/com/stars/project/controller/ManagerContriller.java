@@ -5,10 +5,12 @@ import com.stars.project.core.entity.ResponseEntity;
 import com.stars.project.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -40,11 +42,22 @@ public class ManagerContriller {
     }
 
     /**
-     * 跳转到
+     * 跳转到用户列表页面
      * @return
      */
-    @GetMapping("/addUser")
-    public  String addUser(){
-        return "manager/user/useradd";
+    @GetMapping("/queryUserListMenu")
+    public  String queryUserListMenu(){
+        return "manager/user/userlist";
+    }
+
+    /**
+     * 跳转到修改用户的页面
+     */
+    @GetMapping("/modifyUser")
+    public String modifyUser(Model model, HttpServletRequest request){
+        String id = request.getParameter("id");
+        ResponseEntity entity = systemService.selectSystemUserById(Long.valueOf(id));
+        model.addAttribute("data",entity);
+        return "manager/user/usermodify";
     }
 }

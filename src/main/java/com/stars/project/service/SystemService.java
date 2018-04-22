@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @Author : WuWei
@@ -91,6 +92,24 @@ public class SystemService {
         try {
             SystemUserEntity userInfo =systemUserDao.findOne(id);
             return new SuccessResponseEntity(SystemConst.OPERATION_OK, userInfo);
+        }catch (Exception e){
+            return new ErrorResponseEntity(e.getMessage());
+        }
+    }
+
+    public ResponseEntity selectAllSystemUser(){
+        try {
+            List<SystemUserEntity> userInfos =systemUserDao.findAll();
+            return new SuccessResponseEntity(SystemConst.OPERATION_OK, userInfos);
+        }catch (Exception e){
+            return new ErrorResponseEntity(e.getMessage());
+        }
+    }
+
+    public ResponseEntity deleteSystemUser(long id){
+        try {
+            systemUserDao.delete(id);
+            return new SuccessResponseEntity(SystemConst.OPERATION_OK, id);
         }catch (Exception e){
             return new ErrorResponseEntity(e.getMessage());
         }

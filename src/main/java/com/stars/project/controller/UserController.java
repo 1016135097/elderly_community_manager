@@ -82,7 +82,7 @@ public class UserController {
      */
     @GetMapping("/addUserMenu")
     public String addUserMenu(Model model,HttpServletRequest request) {
-        String type=request.getParameter("type");
+        String type = request.getParameter("type");
         model.addAttribute("type", type);
         return "login/userAdd";
     }
@@ -96,6 +96,19 @@ public class UserController {
     @ResponseBody
     public ResponseEntity addUser(SystemUserEntity user){
         ResponseEntity entity = systemService.saveUser(user);
+        return entity;
+    }
+    @RequestMapping("/getAllUser")
+    @ResponseBody
+    public ResponseEntity getAllUser(){
+        ResponseEntity entity = systemService.selectAllSystemUser();
+        return entity;
+    }
+    @GetMapping("/deleteUser")
+    @ResponseBody
+    public ResponseEntity deleteUser(HttpServletRequest request){
+        long id = Long.parseLong(request.getParameter("id"));
+        ResponseEntity entity = systemService.deleteSystemUser(id);
         return entity;
     }
 }

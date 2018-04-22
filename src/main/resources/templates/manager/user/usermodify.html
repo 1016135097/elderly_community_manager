@@ -8,11 +8,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>website manager</title>
   <!-- Bootstrap -->
-  <link th:href="@{bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{~/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
   <!-- Font Awesome -->
-  <link th:href="@{font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+  <link th:href="@{~/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
   <!-- Custom Theme Style -->
-  <link th:href="@{custom/css/custom.min.css}" rel="stylesheet">
+  <link th:href="@{~/custom/css/custom.min.css}" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -20,13 +20,9 @@
   <div class="main_container">
     <div class="col-md-3 left_col">
       <!-- sidebar menu -->
-      <div th:replace="manager/partial/sidebarMenu :: sidebarmenu">
+      <div th:replace="manager/partial/sidebarSystemMenu :: sidebarmenu">
       </div>
     </div>
-    <!-- top navigation -->
-    <div th:replace="manager/partial/navigation :: navigation">
-    </div>
-    <!-- /top navigation -->
     <!-- page content -->
     <div class="right_col" role="main">
       <div class="">
@@ -41,7 +37,7 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2>添加用户</h2>
+                <h2>编辑用户</h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
@@ -60,8 +56,9 @@
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
-                <form id="add-user" class="form-horizontal form-label-left" novalidate>
-                  <input type="hidden" id="userId" th:value="${#httpServletRequest.getAttribute('id')}" name="id"/>
+                <form id="modifyUser" class="form-horizontal form-label-left" novalidate>
+                  <input type="hidden" id="id" name="id"/>
+                  <input type="hidden" id="createTime" name="createTime"/>
                   <div class="item form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userName">姓名<span class="required">*</span>
                     </label>
@@ -70,17 +67,24 @@
                     </div>
                   </div>
                   <div class="item form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="loginName">登录名<span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">登录名<span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="loginName" name="loginName" required="required" placeholder="请输入登录名" class="form-control col-md-7 col-xs-12">
+                      <input type="text" id="name" name="name" required="required" placeholder="请输入登录名" class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
                   <div class="item form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userType">用户类型</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idNumber">身份证号 <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="identityCodeValid" id="idNumber" name="idNumber" required="required" class="form-control col-md-7 col-xs-12" placeholder="请输入身份证号">
+                    </div>
+                  </div>
+                  <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="type">用户类型</label>
                     <div class="col-md-1 col-sm-1 col-xs-12">
-                      <select class="form-control" id="userType" name="userType">
-                        <option value="2">普通hr</option>
+                      <select class="form-control" id="type" name="type">
+                        <option value="0">普通hr</option>
                         <option value="1">管理员</option>
                       </select>
                     </div>
@@ -102,12 +106,12 @@
                   <div class="item form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">性别</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <div id="gender" class="btn-group" data-toggle="buttons" required>
+                      <div id="sex" class="btn-group" data-toggle="buttons" required>
                         <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" required>
-                          <input type="radio" name="gender" value="男" required> &nbsp;男 &nbsp;
+                          <input type="radio" name="sex" value="0" required> &nbsp;男 &nbsp;
                         </label>
                         <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                          <input type="radio" name="gender" value="女" >&nbsp;女 &nbsp;
+                          <input type="radio" name="sex" value="1" >&nbsp;女 &nbsp;
                         </label>
                       </div>
                     </div>
@@ -125,23 +129,24 @@
                     </div>
                   </div>
                   <div class="item form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telNumber">电话 <span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="age">年龄 <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="tel" id="telNumber" name="telNumber" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12" placeholder="请输入电话">
+                      <input type="number" id="age" name="age"  required="required"  class="form-control col-md-7 col-xs-12" placeholder="请输入年龄">
                     </div>
                   </div>
                   <div class="item form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">描述 <span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mobile">电话 <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <textarea id="description" required="required" name="description" class="form-control col-md-7 col-xs-12"></textarea>
+                      <input type="tel" id="mobile" name="mobile" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12" placeholder="请输入电话">
                     </div>
                   </div>
+
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-9 col-md-offset-5">
-                      <a type="cancle" class="btn btn-primary" th:href="@{/getUserListPage}">取消</a>
+                      <a type="cancle" class="btn btn-primary" th:href="@{/manager/queryUserListMenu}">取消</a>
                       <button id="send" type="button" class="btn btn-success" onclick="modifyUser()">提交</button>
                     </div>
                   </div>
@@ -153,61 +158,61 @@
       </div>
     </div>
     <!-- /page content -->
-
-    <!-- footer content -->
-  <div th:replace="manager/partial/footer :: footer">
-    <!-- /footer content -->
-  </div>
 </div>
 </div>
-<script th:src="@{js/jquery.min.js}"></script>
-<script th:src="@{bootstrap/dist/js/bootstrap.min.js}"></script>
-<script th:src="@{fastclick/lib/fastclick.js}"></script>
-<script th:src="@{validator/validator.js}"></script>c
-<script th:src="@{custom/js/custom.js}"></script>
-<script th:src="@{js/tools.js}"></script>
-    <script th:inline="javascript">
+<script th:src="@{~/js/jquery/jquery.min.js}"></script>
+<script th:src="@{~/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{~/fastclick/lib/fastclick.js}"></script>
+<script th:src="@{~/validator/validator.js}"></script>
+<script th:src="@{~/custom/js/custom.js}"></script>
+<script th:src="@{~/js/common/tools.js}"></script>
+<script th:inline="javascript">
+    var data={};
   $(function () {
-    var id =$("#userId").val();
-    var url = getRootPath()+'/getUserById?id='+id;
-    $.ajax({
-        type:"get",
-        url:url,
-        dataType:"json",
-        success:function(data) {
-            initForm(data);
-        }
-    });
-    var temp =[[${#httpServletRequest.getAttribute('id')}]];
-    console.log(temp);
+      data = [[${data}]];
+      initForm(data);
   })
+
     function  initForm(data) {
         $('#userName').val(data.data.userName);
-        $('#loginName').val(data.data.loginName);
+        $('#name').val(data.data.name);
+        $('#idNumber').val(data.data.idNumber);
         $('#email').val(data.data.email);
-        $(":radio[name='gender'][value='" + data.data.gender + "']").parent('label').addClass('active');
-        $('#telNumber').val(data.data.telNumber);
-        $('#description').val(data.data.description);
+        $('#password').val(data.data.password);
+        $(":radio[name='sex'][value='" + data.data.sex + "']").parent('label').addClass('active');
+        $('#mobile').val(data.data.mobile);
+        $('#age').val(data.data.age);
+        $('#id').val(data.data.id);
+        $('#type').val(data.data.type);
+        $('#createTime').val(timestampToTime(data.data.createTime));
     }
-
-
+    function timestampToTime(timestamp) {
+        var date = new Date(timestamp );//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y+M+D+h+m+s;
+    }
 
   function modifyUser() {
       if (!validator.checkAll($('form'))) {
           console.log('校验失败');
           return;
       }
-      var url = getRootPath()+"/modifyUser";
+      var url = "/login/modifySystemUser";
       $.ajax({
           type:"post",
           url:url,
           dataType:'json',
-          data:$("#add-user").serialize(),
+          data:$("#modifyUser").serialize(),
           async:false,
           success:function(data) {
               if(data.code==1){
                   alert("修改成功");
-                  window.location.href=getRootPath()+"/getUserListPage";
+                  window.location.href="/manager/queryUserListMenu";
               }else {
                   alert("操作信息："+data.msg);
               }
@@ -217,55 +222,6 @@
           }
       });
   }
-
-  function init_validator() {
-      if (typeof (validator) === 'undefined') {
-          return;
-      }
-      console.log('init_validator');
-
-      // initialize the validator function
-      validator.message.date = 'not a real date';
-
-      // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
-      $('form')
-          .on('blur', 'input[required], input.optional, select.required', validator.checkField)
-          .on('change', 'select.required', validator.checkField)
-          .on('keypress', 'input[required][pattern]', validator.keypress);
-
-      $('.multi.required').on('keyup blur', 'input', function () {
-          validator.checkField.apply($(this).siblings().last()[0]);
-      });
-
-      $('form').submit(function (e) {
-          e.preventDefault();
-          var submit = true;
-
-          // evaluate the form using generic validaing
-          if (!validator.checkAll($(this))) {
-              console.log('校验失败');
-              submit = false;
-          }
-
-          if (submit){
-              modifyUser();
-              this.submit();
-          }
-
-          return false;
-      });
-
-  };
-  function initMenuState() {
-      var menuState =[[${#httpSession.getAttribute('menuState')}]];
-      if(menuState != null){
-          $('body').attr('class',menuState);
-      }
-  }
-  //      初始化 页面菜单状态
-  $(function () {
-      initMenuState();
-  })
 </script>
 </body>
 </html>

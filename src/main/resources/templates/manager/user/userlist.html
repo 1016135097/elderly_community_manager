@@ -25,7 +25,7 @@
     <div class="main_container">
       <div class="col-md-3 left_col">
         <!-- sidebar menu -->
-        <div th:replace="manager/partial/sidebarMenu :: sidebarmenu">
+        <div th:replace="manager/partial/sidebarSystemMenu :: sidebarmenu">
         </div>
       </div>
       <!-- top navigation -->
@@ -49,17 +49,6 @@
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <!--<ul class="dropdown-menu" role="menu">-->
-                          <!--<li><a href="#">Settings 1</a>-->
-                          <!--</li>-->
-                          <!--<li><a href="#">Settings 2</a>-->
-                          <!--</li>-->
-                        <!--</ul>-->
-                      </li>
-                      <!--<li><a class="close-link"><i class="fa fa-close"></i></a>-->
-                      <!--</li>-->
                     </ul>
                     <div class="clearfix"></div>
                   </div>
@@ -75,7 +64,6 @@
                               <th>登录名</th>
                               <th>电话</th>
                               <th>邮箱</th>
-                              <th>描述</th>
                               <th>操作</th>
                             </tr>
                             </thead>
@@ -140,10 +128,10 @@
           },
           // "bProcessing": true, //开启读取服务器数据时显示正在加载中……特别是大数据量的时候，开启此功能比较好
           "bServerSide": false, //开启服务器模式，使用服务器端处理配置datatable。注意：sAjaxSource参数也必须被给予为了给datatable源代码来获取所需的数据对于每个画。 这个翻译有点别扭。开启此模式后，你对datatables的每个操作 每页显示多少条记录、下一页、上一页、排序（表头）、搜索，这些都会传给服务器相应的值。
-          "sAjaxSource": getRootPath()+"/getAllUser", //给服务器发请求的url
+          "sAjaxSource": "/login/getAllUser", //给服务器发请求的url
           columnDefs:[
               {
-                  targets: 7,
+                  targets: 6,
                   render: function (row, type, data, meta) {
                       return "<input type='button' value='删除' onclick='deleteUser("+data.id+")'/>"
                           +"<input type='button' value='编辑' onclick='modifyUser("+data.id+")'/>"
@@ -152,24 +140,33 @@
               {
                   targets: 2,
                   render: function (row, type, data, meta) {
-                      if(data.userType==2){
+                      if(data.type==0){
                         return "普通hr";
-                      }else if(data.userType==1){
+                      }else if(data.type==1){
                         return "管理员";
                       }
                   }
               },
-              { "orderable": false, "targets": 7 },
+              {
+                  targets: 1,
+                  render: function (row, type, data, meta) {
+                      if(data.sex==0){
+                          return "男";
+                      }else {
+                          return "女";
+                      }
+                  }
+              },
+              { "orderable": false, "targets": 6 },
           ],
           "aoColumns": [ //这个属性下的设置会应用到所有列，按顺序没有是空
 //              {"sDefaultContent": ''}, // sDefaultContent 如果这一列不需要填充数据用这个属性，值可以不写，起占位作用
               {"mData": 'userName'}, //mData 表示发请求时候本列的列明，返回的数据中相同下标名字的数据会填充到这一列
-              {"mData": 'gender'},
-              {"mData": 'userType'},
-              {"mData": 'loginName'},
-              {"mData": 'telNumber'},
+              {"mData": 'sex'},
+              {"mData": 'type'},
+              {"mData": 'name'},
+              {"mData": 'mobile'},
               {"mData": 'email'},
-              {"mData": 'description'},
               {"sDefaultContent": '', "sClass": "action"},//sClass 表示给本列加class
           ],
           "fnServerData": function (sSource, aoData,fnCallback) {
@@ -194,14 +191,14 @@
       });
 
       function modifyUser(id) {
-          window.location.href=getRootPath()+"/getUserModifyPage?id="+id
+          window.location.href="/manager/modifyUser?id="+id
       }
       function deleteUser(id) {
           var r=window.confirm ("确定删除？");
           if(r == false){
               return;
           }
-          var url = getRootPath()+"/deleteUser";
+          var url = "/login/deleteUser";
           console.log(url);
           $.ajax({
               type:"get",
