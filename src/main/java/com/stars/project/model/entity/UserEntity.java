@@ -25,13 +25,32 @@ public class UserEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
+  /**
+   * 姓名
+   */
   private String name;
+  /**
+   * 性别 0:男 1:女
+   */
   private long sex;
+  /**
+   * 年龄
+   */
   private long age;
+  /**
+   * 电话
+   */
   private String mobile;
-  private String idNumber;
+  /**
+   * 紧急联系人
+   */
   private String emergencyContact;
-  private String password;
+  /**
+   * 是否需要帮助 0:需要 1:不需要
+   */
   private long type;
+  /**
+   * 创建时间
+   */
   private java.sql.Timestamp createTime;
 }

@@ -21,7 +21,10 @@ public class UserController {
     @Autowired(required = false)
     public SystemService systemService;
     @GetMapping("/index")
-    public String index(){
+    public String index(HttpSession session) {
+        session.setAttribute(SystemConst.USER, null);
+        session.setAttribute(SystemConst.USERNAME, null);
+        session.setAttribute("userid", null);
         return "login/index";
     }
     @PostMapping("/login")
