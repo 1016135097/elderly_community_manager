@@ -34,6 +34,10 @@ public class UserEntity {
    */
   private long sex;
   /**
+   * 住址
+   */
+  private String address;
+  /**
    * 年龄
    */
   private long age;
@@ -46,9 +50,17 @@ public class UserEntity {
    */
   private String emergencyContact;
   /**
-   * 是否需要帮助 0:需要 1:不需要
+   * 是否需要帮助 0:不需要 1:需要 2:已领取
    */
   private long type;
+  /**
+   * 是否为孤寡老人 0:否 1:是
+   */
+  private long retireType;
+  /**
+   * 是否有医疗保险 0:没有 1:有
+   */
+  private long medicalType;
   /**
    * 创建时间
    */

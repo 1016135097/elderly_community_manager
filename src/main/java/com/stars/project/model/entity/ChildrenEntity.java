@@ -13,6 +13,7 @@ import javax.persistence.*;
  * @Description:
  * @Version : 1.0
  * @Modified By :
+ * 子女信息
  **/
 @Data
 @Builder
@@ -25,12 +26,20 @@ public class ChildrenEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   private long userId;
+  /**
+   * 姓名
+   */
   private String name;
-  private long sex;
+  /**
+   * 年龄
+   */
   private long age;
+  /**
+   * 手机号
+   */
   private String mobile;
-  private String idNumber;
-  private String email;
-  private long type;
+  /**
+   * 住址
+   */
   private String address;
 }

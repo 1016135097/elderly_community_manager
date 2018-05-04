@@ -13,6 +13,7 @@ import javax.persistence.*;
  * @Description:
  * @Version : 1.0
  * @Modified By :
+ * 疾病情况表
  **/
 @Data
 @Builder
@@ -25,8 +26,20 @@ public class IllnessEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   private long userId;
+  /**
+   * 疾病名称
+   */
   private String name;
+  /**
+   * 疾病状态
+   */
   private String state;
+  /**
+   * 主治医院
+   */
   private String hospital;
-  private long type;
+  /**
+   * 是否有疾病
+   */
+  private long isillness;
 }

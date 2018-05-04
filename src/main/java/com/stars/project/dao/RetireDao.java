@@ -11,4 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Modified By :
  **/
 public interface RetireDao extends JpaRepository<RetireEntity,Long> {
+    void deleteByUserId(long userId);
+    RetireEntity findByUserId(long userId);
 }

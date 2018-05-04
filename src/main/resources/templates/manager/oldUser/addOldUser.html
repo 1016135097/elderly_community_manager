@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>website manager</title>
     <!-- Bootstrap -->
-    <link th:href="@{~/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{~/bootstrap/dist/css/bootstrap.css}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link th:href="@{~/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{~/font-awesome/css/font-awesome.css}" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link th:href="@{~/css/nprogress.css}" rel="stylesheet">
     <link th:href="@{~/custom/css/custom.css}" rel="stylesheet">
@@ -57,41 +57,27 @@
                                     <li>
                                         <a href="#step-2">
                                             <span class="step_no">2</span>
-                                              <small>地址信息</small>
+                                              <small>子女信息</small>
                                           </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#step-3">
                                             <span class="step_no">3</span>
-                                              <small>子女信息</small>
+                                              <small>退休情况</small>
                                           </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#step-4">
                                             <span class="step_no">4</span>
-                                              <small>退休情况</small>
-                                          </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#step-5">
-                                            <span class="step_no">5</span>
-                                              <small>医疗情况</small>
-                                          </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#step-6">
-                                            <span class="step_no">6</span>
                                               <small>疾病情况</small>
                                           </span>
                                         </a>
                                     </li>
                                 </ul>
                                 <div id="step-1">
-                                    <form class="form-horizontal form-label-left">
+                                    <form id="form1" class="form-horizontal form-label-left">
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">姓名 <span class="required">*</span>
@@ -128,6 +114,13 @@
                                             </div>
                                         </div>
                                         <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">地址 <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="address" name="address" required="required" placeholder="请输入老人住址" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emergencyContact">紧急联系人<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -143,22 +136,119 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="medicalType">是否有医疗保险</label>
+                                            <div class="col-md-1 col-sm-1 col-xs-12">
+                                                <select class="form-control" id="medicalType" name="medicalType">
+                                                    <option value="0">没有</option>
+                                                    <option value="1">有</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="retireType">是否为孤寡老人</label>
+                                            <div class="col-md-1 col-sm-1 col-xs-12">
+                                                <select class="form-control" id="retireType" name="retireType">
+                                                    <option value="0">否</option>
+                                                    <option value="1">是</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </form>
 
                                 </div>
                                 <div id="step-2">
-                                    <h2 class="StepTitle">Step 2 Content</h2>
+                                    <form id="form2" class="form-horizontal form-label-left">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="childName">儿女姓名
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="childName" name="name" required="required" placeholder="请输入儿女姓名" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
 
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="childAge">年龄
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="number" id="childAge" name="age"  required="required"  class="form-control col-md-7 col-xs-12" placeholder="请输入年龄">
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="childMobile">电话
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="tel" id="childMobile" name="mobile" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12" placeholder="请输入电话">
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="childAddress">地址
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="childAddress" name="childAddress" required="required" placeholder="请输入住址" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div id="step-3">
-                                    <h2 class="StepTitle">Step 3 Content</h2>
+                                    <form id="form3" class="form-horizontal form-label-left">
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="retireAge">退休年龄
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="number" id="retireAge" name="age"  required="required"  class="form-control col-md-7 col-xs-12" placeholder="请输入退休年龄">
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="retiresType">退休类型</label>
+                                            <div class="col-md-1 col-sm-1 col-xs-12">
+                                                <select class="form-control" id="retiresType" name="type">
+                                                    <option value="0">正常退休</option>
+                                                    <option value="1">特殊工种退休</option>
+                                                    <option value="2">病退休</option>
+                                                </select>
+                                            </div>
+                                        </div>
 
+                                    </form>
                                 </div>
                                 <div id="step-4">
-                                    <h2 class="StepTitle">Step 4 Content</h2>
+                                    <form id="form4" class="form-horizontal form-label-left">
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="isillness">是否有疾病</label>
+                                            <div class="col-md-1 col-sm-1 col-xs-12">
+                                                <select class="form-control" id="isillness" onchange="selectOnchang(this)">
+                                                    <option value="0">无</option>
+                                                    <option value="1">有</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div id="illness">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="illnessName">疾病名称
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="illnessName" name="name"  placeholder="请输入疾病名称" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
 
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="state">疾病状态
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="state" name="state"   class="form-control col-md-7 col-xs-12" placeholder="请输入疾病状态">
+                                                </div>
+                                            </div>
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="hospital">主治医院
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="hospital" name="hospital"  class="form-control col-md-7 col-xs-12" placeholder="请输入主治医院">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-
                             </div>
                             <!-- End SmartWizard Content -->
                         </div>
@@ -175,5 +265,18 @@
 <script th:src="@{~/js/common/nprogress.js}"></script>
 <script th:src="@{~/js/jquery/jquery.smartWizard.js}"></script>
 <script th:src="@{~/custom/js/custom.js}"></script>
+<script th:inline="javascript">
+
+
+    function selectOnchang(obj){
+        if(obj.selectedIndex == '0'){
+            $('#illness').find('input,textarea,select').attr('readonly',true);
+        }else{
+            $('#illness').find('input,textarea,select').attr('readonly',false);
+        }
+    }
+
+
+</script>
 </body>
 </html>

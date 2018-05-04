@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/manager")
-public class ManagerContriller {
+public class ManagerController {
     @Autowired(required = false)
     public SystemService systemService;
 
@@ -51,7 +51,7 @@ public class ManagerContriller {
     }
 
     /**
-     * 跳转到修改用户的页面
+     * 修改用户
      */
     @GetMapping("/modifyUser")
     public String modifyUser(Model model, HttpServletRequest request){

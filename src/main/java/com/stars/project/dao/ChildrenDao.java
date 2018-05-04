@@ -11,4 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Modified By :
  **/
 public interface ChildrenDao extends JpaRepository<ChildrenEntity,Long> {
+    void deleteByUserId(long userId);
+
+    ChildrenEntity findByUserId(long userId);
 }

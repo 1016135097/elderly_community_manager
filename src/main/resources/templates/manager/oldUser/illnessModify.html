@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>website manager</title>
+    <!-- Bootstrap -->
+    <link th:href="@{~/bootstrap/dist/css/bootstrap.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link th:href="@{~/font-awesome/css/font-awesome.css}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link th:href="@{~/custom/css/custom.css}" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <!-- sidebar menu -->
+            <div th:replace="manager/partial/sidebarSystemMenu :: sidebarmenu">
+            </div>
+        </div>
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>子女信息管理</h3>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>编辑子女信息</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                        <!--
+                                        <ul class="dropdown-menu" role="menu">
+                                          <li><a href="#">Settings 1</a>
+                                          </li>
+                                          <li><a href="#">Settings 2</a>
+                                          </li>
+                                        </ul>
+                                        -->
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <form id="modifyUser" class="form-horizontal form-label-left" novalidate>
+                                    <input type="hidden" id="id" name="id"/>
+                                    <input type="hidden" id="userId" name="userId"/>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">疾病名称
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" id="name" name="name" required="required" placeholder="请输入疾病名称" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="state">疾病状态
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" id="state" name="state" required="required" placeholder="请输入疾病状态" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="hospital">主治医院
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" id="hospital" name="hospital" required="required" placeholder="请输入主治医院" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-9 col-md-offset-5">
+                                            <a type="cancle" class="btn btn-primary" th:href="@{/oldUser/oldUserListMenu}">取消</a>
+                                            <button id="send" type="button" class="btn btn-success" onclick="modifyOldUser()">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+    </div>
+</div>
+<script th:src="@{~/js/jquery/jquery.min.js}"></script>
+<script th:src="@{~/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{~/fastclick/lib/fastclick.js}"></script>
+<script th:src="@{~/validator/validator.js}"></script>
+<script th:src="@{~/custom/js/custom.js}"></script>
+<script th:src="@{~/js/common/tools.js}"></script>
+<script th:inline="javascript">
+    var data={};
+    $(function () {
+        data = [[${data}]];
+        initForm(data);
+    })
+
+    function  initForm(data) {
+        $('#name').val(data.data.name);
+        $('#state').val(data.data.state);
+        $('#hospital').val(data.data.hospital);
+        $('#id').val(data.data.id);
+        $('#userId').val(data.data.userId);
+    }
+
+    function modifyOldUser() {
+        if (!validator.checkAll($('form'))) {
+            console.log('校验失败');
+            return;
+        }
+        var url = "/oldUser/modifyIllness";
+        $.ajax({
+            type:"post",
+            url:url,
+            dataType:'json',
+            data:$("#modifyUser").serialize(),
+            async:false,
+            success:function(data) {
+                if(data.code==1){
+                    alert("修改成功");
+                    window.location.href="/oldUser/oldUserListMenu";
+                }else {
+                    alert("操作信息："+data.msg);
+                }
+            },
+            error:function (data) {
+                alert("出现错误，请联系管理员。");
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -13,6 +13,7 @@ import javax.persistence.*;
  * @Description:
  * @Version : 1.0
  * @Modified By :
+ * 退休信息
  **/
 @Data
 @Builder
@@ -25,7 +26,12 @@ public class RetireEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   private long userId;
+  /**
+   * 退休年龄
+   */
   private long age;
-  private long type;
-  private java.sql.Timestamp retireTime;
+  /**
+   * 退休类型
+   */
+  private String type;
 }

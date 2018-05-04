@@ -11,4 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Modified By :
  **/
 public interface IllnessDao extends JpaRepository<IllnessEntity,Long> {
+    void deleteByUserId(long userId);
+    IllnessEntity findByUserId (long userId);
 }

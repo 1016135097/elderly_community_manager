@@ -2092,10 +2092,12 @@ function init_SmartWizard() {
     }
     console.log('init_SmartWizard');
 
-    $('#wizard').smartWizard();
+    //$('#wizard').smartWizard();
 
-    $('#wizard_verticle').smartWizard({
-        transitionEffect: 'slide'
+    $('#wizard').smartWizard({
+        transitionEffect: 'fade',
+        labelNext: '下一步', labelPrevious: '上一步', labelFinish: '完成',
+        onLeaveStep: leavestepCallback,onFinish: finishCallback
     });
 
     $('.buttonNext').addClass('btn btn-success');
@@ -2103,7 +2105,98 @@ function init_SmartWizard() {
     $('.buttonFinish').addClass('btn btn-default');
 
 };
+function leavestepCallback(obj){
+    var step_num= obj.attr('rel');
+    return validateSteps(step_num);
 
+}
+$.fn.serializeObject = function () {
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function () {
+        if (o[this.name]) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+}
+function finishCallback(){
+    var oldUser=$("#form1").serializeObject();
+    var child = $("#form2").serializeObject();
+    var retire = $("#form3").serializeObject();
+    var illness = $("#form4").serializeObject();
+    var da = {};
+    da["oldUser"]=oldUser;
+    da["child"] = child;
+    da["retire"]=retire;
+    da["illness"] = illness;
+    console.info(da)
+    console.info(JSON.stringify(da));
+    $.ajax({
+        type:"post",
+        url:'/oldUser/addOldUser',
+        dataType:'json',
+        data:{'oldUser':JSON.stringify(da)},
+        async:false,
+        success:function(data) {
+            if(data.code==1){
+                var result = confirm("添加成功，是否继续添加？");
+                if(result){//true
+                    window.location.href="/oldUser/addOldUserMenu";
+                } else { //false
+                    window.location.href="/login/manager?type=1";
+                }
+            }else {
+                alert("操作信息："+data.msg);
+            }
+        },
+        error:function (data) {
+            alert("出现错误，请联系管理员。");
+        }
+    });
+}
+
+
+function validateSteps(step){
+    var isStepValid = true;
+    // validate step 1
+    if(step == 1){
+        if(validateStep1() == false ){
+            isStepValid = false;
+
+        }
+    }
+    // validate step3
+    if(step == 3) {
+        if($('#isillness').val() == '0'){
+            $('#illness').find('input,textarea,select').attr('readonly',true);
+        }else{
+            $('#illness').find('input,textarea,select').attr('readonly',false);
+        }
+    }
+    return isStepValid;
+}
+
+function validateStep1(){
+    var isValid = true;
+
+    if (!validator.checkAll($('#form1'))) {
+        isValid = false;
+    }else{
+        if($('#retireType').val() == '1'){
+            // 若是孤寡老人 设置表单2不可用
+            $('#form2').find('input,textarea,select').attr('readonly',true)
+        }else{
+            $('#form2').find('input,textarea,select').attr('readonly',false)
+        }
+    }
+    return isValid;
+}
 
 /* VALIDATOR */
 

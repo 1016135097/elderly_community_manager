@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>website manager</title>
+    <!-- Bootstrap -->
+    <link th:href="@{~/bootstrap/dist/css/bootstrap.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link th:href="@{~/font-awesome/css/font-awesome.css}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link th:href="@{~/custom/css/custom.css}" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <!-- sidebar menu -->
+            <div th:replace="manager/partial/sidebarSystemMenu :: sidebarmenu">
+            </div>
+        </div>
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>老年人管理</h3>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>编辑老年人</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                        <!--
+                                        <ul class="dropdown-menu" role="menu">
+                                          <li><a href="#">Settings 1</a>
+                                          </li>
+                                          <li><a href="#">Settings 2</a>
+                                          </li>
+                                        </ul>
+                                        -->
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <form id="modifyUser" class="form-horizontal form-label-left" novalidate>
+                                    <input type="hidden" id="id" name="id"/>
+                                    <input type="hidden" id="createTime" name="createTime"/>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">姓名 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" id="name" name="name" required="required" placeholder="请输入姓名" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">性别</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div id="sex" class="btn-group" data-toggle="buttons">
+                                                <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                    <input type="radio" name="sex" value="0"> 男
+                                                </label>
+                                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                    <input type="radio" name="sex" value="1"> 女
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="age">年龄 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="number" id="age" name="age"  required="required"  class="form-control col-md-7 col-xs-12" placeholder="请输入年龄">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mobile">电话 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="tel" id="mobile" name="mobile" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12" placeholder="请输入电话">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">地址 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" id="address" name="address" required="required" placeholder="请输入老人住址" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emergencyContact">紧急联系人<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" id="emergencyContact" name="emergencyContact" required="required" placeholder="请输入紧急联系人" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="type">是否需要帮助</label>
+                                        <div class="col-md-1 col-sm-1 col-xs-12">
+                                            <select class="form-control" id="type" name="type">
+                                                <option value="0">不需要</option>
+                                                <option value="1">需要</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="medicalType">是否有医疗保险</label>
+                                        <div class="col-md-1 col-sm-1 col-xs-12">
+                                            <select class="form-control" id="medicalType" name="medicalType">
+                                                <option value="0">没有</option>
+                                                <option value="1">有</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="retireType">是否为孤寡老人</label>
+                                        <div class="col-md-1 col-sm-1 col-xs-12">
+                                            <select class="form-control" id="retireType" name="retireType">
+                                                <option value="0">否</option>
+                                                <option value="1">是</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-9 col-md-offset-5">
+                                            <a type="cancle" class="btn btn-primary" th:href="@{/oldUser/oldUserListMenu}">取消</a>
+                                            <button id="send" type="button" class="btn btn-success" onclick="modifyOldUser()">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+    </div>
+</div>
+<script th:src="@{~/js/jquery/jquery.min.js}"></script>
+<script th:src="@{~/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{~/fastclick/lib/fastclick.js}"></script>
+<script th:src="@{~/validator/validator.js}"></script>
+<script th:src="@{~/custom/js/custom.js}"></script>
+<script th:src="@{~/js/common/tools.js}"></script>
+<script th:inline="javascript">
+    var data={};
+    $(function () {
+        data = [[${data}]];
+        initForm(data);
+    })
+
+    function  initForm(data) {
+        $('#name').val(data.data.name);
+        $('#address').val(data.data.address);
+        $('#emergencyContact').val(data.data.emergencyContact);
+        $('#retireType').val(data.data.retireType);
+        $('#medicalType').val(data.data.medicalType);
+        $(":radio[name='sex'][value='" + data.data.sex + "']").parent('label').addClass('active');
+        $('#mobile').val(data.data.mobile);
+        $('#age').val(data.data.age);
+        $('#id').val(data.data.id);
+        $('#type').val(data.data.type);
+        $('#createTime').val(timestampToTime(data.data.createTime));
+    }
+    function timestampToTime(timestamp) {
+        var date = new Date(timestamp );//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y+M+D+h+m+s;
+    }
+
+    function modifyOldUser() {
+        if (!validator.checkAll($('form'))) {
+            console.log('校验失败');
+            return;
+        }
+        var url = "/oldUser/modifyOldUser";
+        $.ajax({
+            type:"post",
+            url:url,
+            dataType:'json',
+            data:$("#modifyUser").serialize(),
+            async:false,
+            success:function(data) {
+                if(data.code==1){
+                    alert("修改成功");
+                    window.location.href="/oldUser/oldUserListMenu";
+                }else {
+                    alert("操作信息："+data.msg);
+                }
+            },
+            error:function (data) {
+                alert("出现错误，请联系管理员。");
+            }
+        });
+    }
+</script>
+</body>
+</html>

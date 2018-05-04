@@ -27,6 +27,11 @@ public class SystemService {
     @Autowired(required = false)
     public SystemUserDao systemUserDao;
 
+    /**
+     * 根据名字查询系统用户
+     * @param user
+     * @return
+     */
     public ResponseEntity checkUserByName(SystemUserEntity user) {
         try {
             String name = user.getName();
